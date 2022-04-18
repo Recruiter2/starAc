@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>spectateur</title>
+   <script type="text/javascript" src='artiste.js'> </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+     <input 
+    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();" 
+    />
+     <input 
+    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();" 
+    />
+  </header>
+
+  <body>
+    
+
+    
+    <div id ="Atab1">
+      <h1> Mes Groupes </h1>
+    </div>
+
+
+    
+    <div id="Atab2">
+      <h1> Autres groupes </h1>
+    </div>
+
+
+
+     <h1> Creer un groupe </h1>
+    <form>
+        
+       <fieldset>
+
+        <legend>FORMULAIRE 
+          <abbr title="Ce champ est obligatoire"></abbr></legend>
+        
+
+        
+    <div>
+        <label for="choose">Nom Groupe :</label>
+        <input id="nom"  name="nom" required minlength="1" maxlength="10">
+    </div>
+    <div>
+        <label for="choose">Type :</label>
+        <input id="typee" name="typee" required minlength="3" maxlength="10">
+    </div>
+
+
+    <p> Rechercher des membres ? </p>
+
+    <form action="#n" name="TheForm">
+    <label for="membre"></label>
+    <input type="radio" name="membreS" value="0" checked> Non
+    <input type="radio" name="membreS" value="1" > Oui<br><br>
+    </form>
+    
+    </fieldset>
+    <div>
+        <button onClick="creeGroupe(nom.value,typee.value);"/>
+        Soumettre
+        </button>
+    </div>
+    </form>
+    <script>afficheGroupe(1);afficheGroupe(0);</script>
+  </body>

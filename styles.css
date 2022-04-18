@@ -1,0 +1,129 @@
+table.TableCSS {
+  font-family: Verdana, Geneva, sans-serif;
+  border: 1px solid #FFFFFF;
+  width: 50%;
+  height: 50%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.TableCSS td, table.TableCSS th {
+  border: 3px solid #FFFFFF;
+  padding: 3px 3px;
+}
+table.TableCSS tbody td {
+  font-size: 15px;
+  color: #333333;
+}
+table.TableCSS td:nth-child(even) {
+  background: #EBEBEB;
+}
+table.TableCSS thead {
+  background: #FFFFFF;
+  border-bottom: 4px solid #333333;
+}
+table.TableCSS thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+  border-left: 2px solid #333333;
+}
+table.TableCSS thead th:first-child {
+  border-left: none;
+}
+
+
+
+#general{
+  margin-left:5%;
+  width : 30%;
+}
+
+#gauche{
+    float:left;
+    width:50%;
+}
+
+#droite{
+     float:right;
+     margin-right:5%;
+     width : 30%;
+    border-left: 2px  solid #000;
+	  display: inline-block;
+}
+
+#c{
+  margin-left:45%;
+}
+
+
+
+.button{
+  align-items: center;
+  background-color: #0A66C2;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.button:hover,
+.button:focus { 
+  background-color: #16437E;
+  color: #ffffff;
+}
+
+.button:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, .7);
+}
+
+.button:disabled { 
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, .08);
+  color: rgba(0, 0, 0, .3);
+}
+
+
+header{
+  background-color: black;
+  height : 100px;
+  color: white;
+  text-align: center;
+}
+
+ 
+
+ legend {
+    background-color: #000;
+    color: #fff;
+    padding: 3px 6px;
+}
+
+.output {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}

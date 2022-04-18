@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>spectateur</title>
+   <script type="text/javascript" src='spectateur.js'> </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <p>
+  </p>
+  <header>
+    <input 
+    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();" 
+    />
+     <input 
+    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();" 
+    />
+     Nous sommes le : 
+        <script> 
+        var today = new Date();
+        var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        document.write(date);
+        </script>
+  </header>
+  <div id="general">
+
+  <h3> Hello <script>document.write(getNomSpect());</script> </h3>
+  <p> <img id="logoImg" src="" width="20%"> </p>
+
+
+  <div>
+  <button onClick="TableauSpectacle();"/>
+        Soumettre
+  </button>
+  </div>
+  <div id="gauche">
+    <script> ShowEve(); TableauSpectacle();</script>
+  </div>
+
+
+
+    
+  </div>
+
+
+  <div id="droite">
+    <div id="c">
+      <p>
+      <button class="button" type="button" onclick="reservation();"> RESERVATION </button>
+      <br/>
+      <br/>
+      <button class="button"
+        type="button">
+      CLASSEMENT 
+      </button>
+      </p>
+
+  </div>
+  </div>
+
+
+  
+      <script type="text/javascript">
+          const {nativeImage} = require('electron');
+          let logo = nativeImage.createFromPath('/Users/yvann/OneDrive/Images/logo.png');
+          //let taille = logo.getSize();
+          //logo = logo.resize({width :taille/8, heigth :taille/8})
+          let logoImg = document.getElementById('logoImg').src= logo.toDataURL();
+      </script>
+
+      <footer>
+       
+      </footer>
+</body>
+
+</html>
+

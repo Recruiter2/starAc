@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>index</title>
+   <script type="text/javascript" src='connect.js'> </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+</style>
+ <header>
+     <input 
+    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();" 
+    />
+     <input 
+    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();" 
+    />
+  </header>
+
+    <h1> INSCRIPTION </h1>
+    <div>
+        <h2> FORMULAIRE : </h2>
+    <form>
+        <div>
+        <fieldset>
+
+        <legend>Groupe<abbr title="Ce champ est obligatoire"></abbr></legend>
+        <input type="radio" required name="title" id="r1" value="solo">
+        <label for="r1">SOLO</label>
+        <input type="radio" required name="title" id="r2" value="groupe">
+        <label for="r2">GROUPE </label>
+        <input type="radio" required name="title" id="r3" value="groupeCRE">
+        <label for="r3">NV GROUPE</label>
+        </fieldset>
+        </div>
+    <div>
+        <label for="choose">Nom Groupe :</label>
+        <input id="nom"  name="nom" required minlength="3" maxlength="10">
+    </div>
+    <div>
+        <label for="choose">Type :</label>
+        <input id="typee" name="typee" required minlength="3" maxlength="10">
+    </div>
+    <div>
+        <label for="start">Date :</label>
+        <input type="date" id="date" name="trip-start" value="2022-03-07">
+    </div>
+    <div>
+        <button onClick="ajouteGroupe(nom.value,date.value,typee.value);"/>
+        Soumettre
+        </button>
+    </div>
+    </form>
+</body>
+
+</html>
+

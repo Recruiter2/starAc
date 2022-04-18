@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ADMIN CONTROLE</title>
+    <script  type="text/javascript" src='admin.js'> </script>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+   <h1> Creation EVENEMENT </h1>
+    <div>
+    <form>
+    <div>
+        <label for="choose">Nom :</label>
+        <input id="nom"  name="nom" required minlength="3" maxlength="100">
+    </div>
+    <div>
+        <label for="choose">Prix :</label>
+        <input type="number" id="prix" name="prix">
+    </div> 
+    <div>    
+        <label for="start">Start date:</label>
+        <input type="date" id="dateEve" name="dateEve"
+            value="2022-07-22">
+    </div>
+    <div>
+        <label for="temps">Heure commencement</label>
+
+            <input type="time" id="temps" name="temps"
+       min="18:00" max="23:00" required>
+    </div>
+    <div>
+        <button onClick="creerEve(nom.value,dateEve.value,prix.value,temps.value);"/>
+        Soumettre
+        </button>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+        <button onClick="window.location.assign('admin.html');"/>
+        RETOUR
+        </button>
+        
+</body>
+</html>

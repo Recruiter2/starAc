@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ADMIN CONTROLE</title>
+    <script  type="text/javascript" src='admin.js'> </script>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+   <h1> Supprimer EVENEMENT </h1>
+   <script> ShowEve();TabEve();</script>
+  <div>
+    <button onClick="ShowEve2(mySelect.value);"/>
+    Afficher groupe
+  </div>
+  <div id='1'>
+  </div>
+  <div id='2'>
+  </div>
+  <div id='3'>
+  </div>
+  <div id='4'>
+  </div>
+  <br/>
+  <div id='5'>
+    CHOISIR UN GROUPE 
+    <button onClick="ModifEvenements(mySelect.value,nom.value,prix.value,temps.value,dateEve.value);"/>
+        Modifier Informations 
+        </button>
+  </div>
+
+
+     <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <footer>
+      <div>
+        <button onClick="window.location.assign('admin.html');"/>
+        RETOUR
+        </button>
+      </div>
+    </footer>
+</body>
+</html>

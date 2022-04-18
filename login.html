@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>index</title>
+   <script type="text/javascript" src='connect.js'> </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+</style>
+ <header>
+     <input 
+    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();" 
+    />
+     <input 
+    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();" 
+    />
+  </header>
+
+    <h1> INSCRIPTION </h1>
+    <div>
+        <h2> SE CONNECTER : </h2>
+    <form>
+
+    <div>
+        <label for="choose">Nom :</label>
+        <input id="nom"  name="nom" required minlength="3" maxlength="25">
+    </div>
+    <div>
+        <label for="choose">Mot de passe :</label>
+        <input id="mdp" name="mdp" required minlength="3" maxlength="10">
+    </div>
+    <div>
+        <button onClick="ArtisteConnexion(nom.value,mdp.value);"/>
+        Soumettre
+        </button>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+        <button onClick=""/>
+        CREER UN COMPTE
+        </button>
+    </div>
+    </form>
+
+</body>
+
+</html>
+

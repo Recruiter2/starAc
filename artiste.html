@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>spectateur</title>
+   <script type="text/javascript" src='artiste.js'> </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+     <input 
+    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();" 
+    />
+     <input 
+    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();" 
+    />
+  </header>
+
+  <div id="gauche">
+  <h2>Hello <script>document.write(getNomArt());</script>
+  </h2>
+  <p>
+    <img id="logoImg" src="" width="40%">
+  </p>
+ <p> <span class="vertical"></span> </p>
+  <p>   <section>
+<table style="height: 150px; width: 300px;">
+    <tbody>
+    <tr>
+    <td><img src="https://linkaband.com/assets/images/searchpages/Base-groupe.jpg" alt="" width="250" height="175"></td>
+    <td><img src="https://cdn-s-www.vosgesmatin.fr/images/E0A66AF0-9880-40FC-BC7E-85AA33015FDC/NW_raw/lors-de-sa-precedente-venue-en-mars-dernier-le-groupe-trois-cafes-gourmands-avait-mis-en-transe-le-public-du-palais-des-congres-a-vittel-photo-vm-eric-thiebaut-1564504932.jpg" alt="" width="250" height="175"></td>
+    <td><img src="https://piao.fr/wp-content/uploads/2014/11/oscar-groupe-musique-orleans-780x468.jpg" alt="" width="250" height="175"></td>
+    </tr>
+    <tr>
+    <td><h2>Seul</h2></td>
+    <td><h2>Groupe</h2></td>
+    <td><h2>Créer un groupe</h2></td>
+    </tr>
+    <tr>
+    <td><p>Montrez au monde entier vos perfomances individuelles !</p></td>
+    <td><p>Des Battle vous attendent afin de déterminer le meilleur groupe</p></td>
+    <td><p>Vous vous sentez plus à l'aise en groupe, nous vous aidons à créer un groupe avec d'autres artistes du même style !</p></td>
+    </tr>
+    <tr>
+    <td></td>
+    <td><form action="inscription.html">
+      <input class="button" type="submit" value="INSCRIPTION" />
+    </form></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+  </section></p>
+  </div>
+  <div id="droite">
+    <table class="TableCSS">
+<thead>
+  <tr>
+    <th>General</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>NOTES</td>
+  </tr>
+  <tr>
+    <td>CLASSEMENT</td>
+  </tr>
+  <tr>
+    <td><a href="Agroupe.html">GROUPE</a></td>
+  </tr>
+  <tr>
+    <td>AGENDA</td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+  <br/><br/> <br/><br/> <br/><br/> <br/><br/> 
+  
+
+
+
+      <script type="text/javascript">
+          const {nativeImage} = require('electron');
+          let logo = nativeImage.createFromPath('/Users/yvann/OneDrive/Images/logo.png');
+          
+          //let taille = logo.getSize();
+          //logo = logo.resize({width :taille/8, heigth :taille/8})
+          let logoImg = document.getElementById('logoImg').src= logo.toDataURL();
+      </script>
+
+</body>
+
+</html>
+
