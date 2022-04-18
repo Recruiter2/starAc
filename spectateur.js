@@ -163,7 +163,7 @@ function TableauSpectacle(){
 
 function reservation(){
 
-  var idSpec = window.sessionStorage.getItem("id_spect");
+  var idSpec = window.sessionStorage.getItem("id_spec");
  var sql =  "INSERT INTO `reservation`(`id_concert`, `id_spectateur`, `prix`) VALUES ('1','"+idSpec+"','25.5')";
   console.log(idSpec);
   db.query(sql, function (err, result) {
