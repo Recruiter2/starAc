@@ -56,34 +56,6 @@ function ArtisteConnexion(nom,mdp){
   });
 }
 
-function SpectateurConnexion(nom,mdp){
-  
-  var res=null;
-  db.query("SELECT `id`,`nom`, `password` FROM `spectateur`",
-  function (err, result, fields) {
-    // if any error while executing above query, throw error
-    if (err) throw err;
-    //
-    for (var i=0; i<result.length;i++){
-       if (result[i].nom==nom &&  result[i].password==mdp){
-         res=result[i];
-       }
-    }
-    if (res!=null){
-      window.sessionStorage.setItem("name_spect",res.nom);
-      window.sessionStorage.setItem("id_spect",res.id);
-      window.location.replace("spectateur.html");
-    }
-    else
-    {
-      alert("ERROR CONNEXION");
-    }
-
-  });
-}
-
-
-
 function TableauSpectacle(){
     db.query("SELECT `nom`, `jour`, `temps`,`type` FROM `groupe` ORDER by `temps`", 
   function (err, result, fields) {
