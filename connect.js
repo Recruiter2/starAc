@@ -1,10 +1,11 @@
 const mysql = require('mysql');
 //const session = require('electron');
 const db = mysql.createConnection({
-   host: "localhost",
-   user: "root",
-   password: "",
-   database : "l2_info_3"
+    port: 1183,
+    host: "localhost",
+    user: "l2_info_3",
+    password: "Kaduu6Ox",
+    database: "l2_info_3",
  });
 
 
