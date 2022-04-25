@@ -12,7 +12,7 @@ Projet INFO405
 - [ ] Définition du créneaux automatiquement --> Yvann--> 3/4
 - [ ] Ameliorer Reservation en client et evenement 
 - [ ] Filtre pour la liste des crenaux par date --> Yvann -> TERMINE
-- [ ] Création d'un compte (artiste et spectateur)
+- [ ] Création d'un compte (artiste et spectateur)  -> TERMINE 
 - [ ] Notation de l'artiste par les spectateurs (moyenne des notes) -> TERMINE
 - [ ] Système de récompense régulier (en fonction de cet note)
 - [ ] Gestion profil 
