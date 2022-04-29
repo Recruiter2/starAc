@@ -14,7 +14,7 @@ Projet INFO405
 - [ ] Filtre pour la liste des crenaux par date --> Yvann -> TERMINE
 - [ ] Création d'un compte (artiste et spectateur)  -> TERMINE 
 - [ ] Notation de l'artiste par les spectateurs (moyenne des notes) -> TERMINE
-- [ ] Système de récompense régulier (en fonction de cet note)
+- [ ] Système de récompense régulier (en fonction de cet note) --> Timour
 - [ ] Gestion profil 
 - [ ] CSS (à la fin)
 
