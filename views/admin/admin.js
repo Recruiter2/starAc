@@ -529,13 +529,17 @@ function lanceEvenements(val) {
 
 function modifEtatEvt(etat, id_evt) {
   var modifDB = "UPDATE `evenements` SET `etat`=" + etat + " WHERE id_evt = " + id_evt;
-  console.log(modifDB);
+  //console.log(modifDB);
+  
   db.query(modifDB,
     function (err, result, fields) {
       if (err) throw err;
       window.location.assign('adminLanceEvenement.html');
     });
 
+    if (etat==2){
+      finEve(id_evt);
+    }
 
 }
 
@@ -626,4 +630,55 @@ function modifEtatMSG(etat, id) {
     });
 
 
+}
+
+//////////////////////FIN EVENEMENTS ACTION///////////////////////////
+
+function finEve(id_evt){
+  var request2 ="";
+  db.query(request,
+    function (err, result2, fields) {
+      if (err) throw err;
+      
+    });
+
+  // ON ATTRIBUE LES POINTS AUX SPECTATEURS QUI ONT PARTICIPE
+  var request ="SELECT DISTINCT `id_spec` FROM `pronostic` WHERE id_evt ="+id_evt;
+  db.query(request,
+    function (err, result, fields) {
+      if (err) throw err;
+      for (var i=0;i<result.length;i++){
+        calcul(result[i].id_spec,id_evt);
+      }
+    });
+}
+
+function calcul(id_spec,id_evt){
+  var request = "SELECT * FROM `gagnants` LEFT JOIN pronostic on gagnants.id_evt = pronostic.id_evt && gagnants.position=pronostic.pos && gagnants.id_part = pronostic.id_p WHERE pronostic.id_evt = " + id_evt + " && pronostic.id_spec = " + id_spec;
+  db.query(request,
+    function (err, result, fields) {
+      if (err) throw err;
+      var note = 0;
+      for (var i = 0; i < result.length; i++) {
+        if (result[i].pos == 1) {
+          note = note + 25;
+        }
+        else if (result[i].pos == 2) {
+          note = note + 15;
+        }
+        else {
+          note = note + 10;
+        }
+      }
+      note = note * result.length;
+      rajoutePoints(note,id_spec);
+});
+}
+
+function rajoutePoints(points){
+  var request ="UPDATE `spectateur` SET `points`=points + "+points+" WHERE id_spec = "+id_spec;
+  db.query(request,
+    function (err, result, fields) {
+      if (err) throw err;
+    });
 }

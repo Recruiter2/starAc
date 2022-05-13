@@ -455,8 +455,8 @@ function afficheResProno() {
     });
 }
 
-
-function renvoiNotes(id_evt, pos) {
+// POSITION -> PERMET DE SAVOIR où renvoyer la valeur de la note
+function renvoiNotes(id_evt, position) {
   var id_spect = window.sessionStorage.getItem("id_spec");
   var request = "SELECT * FROM `gagnants` LEFT JOIN pronostic on gagnants.id_evt = pronostic.id_evt && gagnants.position=pronostic.pos && gagnants.id_part = pronostic.id_p WHERE pronostic.id_evt = " + id_evt + " && pronostic.id_spec = " + id_spect;
   db.query(request,
@@ -477,7 +477,7 @@ function renvoiNotes(id_evt, pos) {
         }
       }
       note = note * result.length;
-      document.getElementById(pos).append(note);
+      document.getElementById(position).append(note);
     });
 }
 /*************************************/
