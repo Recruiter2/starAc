@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
+  <meta charset="UTF-8">
   <title>spectateur</title>
    <script type="text/javascript" src='artiste.js'> </script>
   <link rel="stylesheet" href="styles.css" />
@@ -13,6 +14,14 @@
      <input 
     id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();" 
     />
+     <label for="choose-select"></label>
+
+    <select name="choose" id="choose-select" onclick="choixA(value);"> 
+    <option value="">--Please choose an option--</option>
+    <option value="1">Modifier compte</option>
+    <option value="2">Deconnexion</option>
+
+    </select>
   </header>
 
   <div id="gauche">
@@ -63,13 +72,16 @@
     <td>NOTES</td>
   </tr>
   <tr>
-    <td>CLASSEMENT</td>
+    <td><a href="classement.html">CLASSEMENT</a></td>
   </tr>
   <tr>
     <td><a href="Agroupe.html">GROUPE</a></td>
   </tr>
   <tr>
     <td>AGENDA</td>
+  </tr>
+   <tr>
+    <td><a href="messagerie.html">MESSAGERIE</a></td>
   </tr>
 </tbody>
 </table>

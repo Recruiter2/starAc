@@ -1,0 +1,21 @@
+{
+  "name": "bootstrap4-rating-input",
+  "main": "build/bootstrap4-rating-input.min.js",
+  "version": "0.4.1",
+  "homepage": "https://github.com/mssoylu/bootstrap4-rating-input",
+  "authors": [
+    "Javier Toledo <javier@theagilemonkeys.com>",
+    "Mehmet Soylu <mssoylu@gmail.com>",
+  ],
+  "description": "A Lightweight Bootstrap4 Rating Input",
+  "keywords": [
+    "bootstrap",
+    "bootstrap4",
+    "rating"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ]
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>spectateur</title>
+  <script type="text/javascript" src='artiste.js'> </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header>
+    <input
+    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();"
+    />
+    <input
+    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();"
+    />
+  </header>
+
+  <body>
+
+
+
+
+    <form>
+      <h1> Creer un compte spectateur </h1>
+      <fieldset>
+
+        <legend>FORMULAIRE
+          <abbr title="Ce champ est obligatoire"></abbr></legend>
+
+
+
+        <div>
+          <label for="choose">Nom  :</label>
+          <input id="nom"  name="nom" required minlength="1" maxlength="10">
+    </div>
+        <div>
+          <label for="choose">Prenom  :</label>
+          <input id="prenom"  name="prenom" required minlength="1" maxlength="10">
+    </div>
+        <div>
+          <label for="choose">mail :</label>
+          <input id="mail" type ="email" name="mail" required minlength="1" maxlength="100">
+    </div>
+        <div>
+          <label for="choose">MDP :</label>
+          <input id="mdp1" type ="password" name="pwd1" required minlength="1" maxlength="100">
+    </div>
+      <div>
+          <label for="choose">MDP VERIF :</label>
+          <input id="mdp2" type ="password" name="pwd2" required minlength="1" maxlength="100">
+    </div>
+    <div>
+          <label for="choose">Date Naissance :</label>
+          <input id="date" name="date" type="date">
+    </div>
+
+
+      <div>
+        <button onClick="artisteCreeCompte(nom.value, prenom.value, mail.value, mdp1.value, mdp2.value, date.value);"/>
+        Valider
+        </button>
+      </div>
+      </fieldset>
+      <input
+    id="SPECTATEUR" type="button" value="Vous avez déjà un compte ?" class ="button" onclick="loginSpec();"
+    />
+    </form>
+  </body>
+  

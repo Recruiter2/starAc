@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>index</title>
-   <script type="text/javascript" src='connect.js'> </script>
-  <link rel="stylesheet" href="styles.css" />
+    <title>index</title>
+    <script type="text/javascript" src='artiste.js'> </script>
+    <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-</style>
- <header>
-     <input 
-    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();" 
+    </style>
+    <header>
+        <input
+    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();"
     />
-     <input 
-    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();" 
+        <input
+    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();"
     />
   </header>
 
-    <h1> INSCRIPTION </h1>
+    <h1> CONNEXION ARTISTE </h1>
     <div>
-        <h2> SE CONNECTER : </h2>
-    <form>
+        <fieldset>
+            <h2> SE CONNECTER : </h2>
+            <form>
 
-    <div>
-        <label for="choose">Nom :</label>
-        <input id="nom"  name="nom" required minlength="3" maxlength="25">
+                <div>
+                    <label for="choose">Nom :</label>
+                    <input id="nom"  name="nom" required minlength="3" maxlength="25">
     </div>
-    <div>
-        <label for="choose">Mot de passe :</label>
-        <input id="mdp" name="mdp" required minlength="3" maxlength="10">
+                <div>
+                    <label for="choose">Mot de passe :</label>
+                    <input id="mdp" name="mdp" required minlength="3" maxlength="10">
     </div>
-    <div>
-        <input 
-            value="Soumettre" type="button" onclick="ArtisteConnexion(nom.value,mdp.value);" 
+                <div>
+                    <input
+            value="CONNEXION" type="button" onclick="ArtisteConnexion(nom.value,mdp.value);"
         />
+                </div>
+            </form>
+        </fieldset>
     </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <div>
-        <button onClick=""/>
-        CREER UN COMPTE
-        </button>
-    </div>
-    </form>
+    
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div>
+            <form action="artistecreecompte.html">
+            <input type="submit" value="Creer un compte ARTISTE" />
+</form>
+        </div>
 
 </body>
 
 </html>
-

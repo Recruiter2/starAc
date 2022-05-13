@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>spectateur</title>
+  <script type="text/javascript" src='spectateur.js'> </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <p>
+  </p>
+  <header>
+    <input
+    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();"
+    />
+    <input
+    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();"
+    />
+    <label for="choose-select"></label>
+    <select name="choose" id="choose-select" onclick="choixS(value);">
+    <option value="">--Please choose an option--</option>
+    <option value="1">Modifier compte</option>
+    <option value="2">Deconnexion</option>
+
+    </select>
+  </header>
+  <div id='gauche'>
+  </div>
+  <div id='droite'>
+  </div>
+
+  <div id='gauche2'>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </div>
+
+  <script>
+    affichePronoEve();afficheResProno();
+  </script>
+</body>
+
+
+</html>

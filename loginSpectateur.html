@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>index</title>
-   <script type="text/javascript" src='spectateur.js'> </script>
-  <link rel="stylesheet" href="styles.css" />
+    <title>index</title>
+    <script type="text/javascript" src='spectateur.js'> </script>
+    <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-</style>
- <header>
-     <input 
-    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();" 
+    </style>
+    <header>
+        <input
+    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();"
     />
-     <input 
-    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();" 
+        <input
+    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();"
     />
   </header>
 
-    <h1> INSCRIPTION </h1>
+    <h1> CONNEXION SPECTATEUR</h1>
     <div>
+        <fieldset>
         <h2> SE CONNECTER : </h2>
-    <form>
+        <form>
 
-    <div>
-        <label for="choose">Nom :</label>
-        <input id="nom"  name="nom" required minlength="3" maxlength="25">
+            <div>
+                <label for="choose">Nom :</label>
+                <input id="nom"  name="nom" required minlength="3" maxlength="25">
     </div>
-    <div>
-        <label for="choose">Mot de passe :</label>
-        <input id="mdp" name="mdp" required minlength="3" maxlength="10">
+            <div>
+                <label for="choose">Mot de passe :</label>
+                <input id="mdp" type="password" name="mdp" required minlength="3" maxlength="10">
     </div>
-    <div>
+            <div>
         <input 
-            value="Soumettre" type="button" onclick="SpectateurConnexion(nom.value,mdp.value);" 
+            value="CONNEXION" type="button" onclick="SpectateurConnexion(nom.value,mdp.value);" 
         />
-    </div>
-    </form>
+            </div>
+        </form>
+        </fieldset>
     </div>
     <br/>
     <br/>
@@ -43,13 +47,13 @@
     <br/>
     <br/>
     <div>
-        <button onClick=""/>
-        CREER UN COMPTE
-        </button>
+
+        <form action="spectateurcreecompte.html">
+            <input type="submit" value="Creer un compte spectateur" />
+</form>
     </div>
-    
+
 
 </body>
 
 </html>
-

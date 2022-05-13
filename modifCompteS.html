@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <title>spectateur</title>
+  <script type="text/javascript" src='modifcompte.js'> </script>
+  <link rel="stylesheet" href="styles.css" />
+
+
+
+</head>
+
+<body>
+  <p>
+  </p>
+  <header>
+    <input
+    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();"
+    />
+    <input
+    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();"
+    />
+    <label for="choose-select"></label>
+
+    <select name="choose" id="choose-select" onclick="choixS(value);">
+    <option value="">--Please choose an option--</option>
+    <option value="1">Modifier compte</option>
+    <option value="2">Deconnexion</option>
+
+    </select>
+  </header>
+  <div id='1'>
+  </div>
+  <div id='2'>
+  </div>
+  <div id='3'>
+  </div>
+  <div id='4'>
+  </div>
+  <div id='5'>
+  </div>
+  <div>
+    <button onClick="modifCompte(prenom.value,nom.value,mail.value,password.value,dateN.value,0);"/>
+        Modifier Informations 
+        </button>
+  </div>
+  <script>
+    showModifCompte(0);
+  </script>
+</body>
+
+
+</html>

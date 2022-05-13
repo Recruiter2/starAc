@@ -9,9 +9,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "dependencies": {
-    "mysql": "^2.18.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "electron": "16.0.6"
   }
