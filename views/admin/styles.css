@@ -56,6 +56,28 @@ table.TableCSS thead th:first-child {
   margin-left:45%;
 }
 
+.section {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+section {
+  max-height: 80%;
+  margin-bottom: 100px;
+}
+
+form {
+  padding-left: 100px;
+  margin-left: 500;
+  margin: 0 auto;
+  width: 700px;
+}
+
+.button2 {
+  background-color: rgb(253, 194, 1);
+  padding: 8px 18px;
+  border: none;
+}
 
 
 .button{
