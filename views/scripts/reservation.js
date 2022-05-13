@@ -24,10 +24,17 @@ function getSalle(id_salle) {
 
 /**
  * 
- * @param {number} id_concert ID du concert
  * @param {number} id_salle ID de la salle (si implementé un jour)
  */
-function getReservationTable(id_concert, id_salle) {
+function getReservationTable(id_salle) {
+
+    let evt_id = window.sessionStorage.getItem("evt_id");
+    if (evt_id == null) {
+        alert("Vous êtes arriver sur la page de réservation sans avoir d'ID d'évenement assigné...");
+        window.location.assign("spectateur.html");
+        return;
+    }
+
     let salle = getSalle(id_salle);
 
     // On génere un tableau représentant les places libres pour la page de réservation
