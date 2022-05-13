@@ -506,19 +506,13 @@ function spectateurCreeCompte(nom, prenom, mail, mdp1, mdp2, date) {
 
 function SpectateurConnexion(nom, mdp) {
   var res = null;
-  db.query("SELECT * FROM `spectateur`",
+  db.query("SELECT * FROM `spectateur` WHERE nom = '"+nom+"' && password ="+mdp,
     function (err, result, fields) {
       // if any error while executing above query, throw error
       if (err) throw err;
-      for (var i = 0; i < result.length; i++) {
-        if (result[i].nom == nom && result[i].password == mdp) {
-          res = result[i];
-        }
-      }
-
-      if (res != null) {
-        window.sessionStorage.setItem("name_spect", res.nom);
-        window.sessionStorage.setItem("id_spec", res.id_spec);
+      if (result.length != 0) {
+        window.sessionStorage.setItem("name_spect", result[0].nom);
+        window.sessionStorage.setItem("id_spec", result[0].id_spec);
         window.location.replace("spectateur.html");
       }
       else {
@@ -781,6 +775,7 @@ function ajouteNote(note, id_p) {
       if (result[0] == null) {
         var dBnote = "INSERT INTO `note`(`id_participant`, `id_user`, `note`) VALUES (" + id_p + "," + idSpec + "," + note + ")";
         alert("Vous avez mis la note de " + note);
+        rajoutePoints(10);
       }
       else {
         var dBnote = "UPDATE `note` SET note=" + note + " WHERE id_participant = " + id_p + "&& id_user=" + idSpec;
@@ -791,5 +786,16 @@ function ajouteNote(note, id_p) {
           if (err) throw err;
         });
 
+    });
+}
+
+
+
+function rajoutePoints(points){
+  var id_spec = window.sessionStorage.getItem("id_spec");
+  var request ="UPDATE `spectateur` SET `points`=points + "+points+" WHERE id_spec = "+id_spec;
+  db.query(request,
+    function (err, result, fields) {
+      if (err) throw err;
     });
 }
