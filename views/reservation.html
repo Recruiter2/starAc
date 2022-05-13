@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-US">
+ 
+<style>
+    body, footer {
+        padding-top: 15px;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .collapsible {
+        background-color: rgb(255, 196, 38);
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 30%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+    }
+
+    .active, .collapsible:hover {
+        background-color: rgb(255, 210, 89);
+    }
+
+    .collapsible:after {
+        content: '\002B'; /* '+' in Unicode  */
+        color: white;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\2212"; /* '-' in Unicode */
+    }
+
+    .content {
+        margin: 0 auto;
+        max-height: 0px;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        background-color: #f1f1f1;
+        width: 30%;
+    }
+
+    .content li, p {
+        text-align: left;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 10px;
+        *border-collapse: expression('separate', cellSpacing='10px');
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src='reservation.js'> </script>
+    <title>Test Résérvation</title>
+</head>
+ 
+<body>
+    <h1>Test réservation</h1>
+    <div id="reserv_table">
+        
+    </div>
+</body>
+
+<footer>
+    <button class="collapsible">Places sélectionnées (0)</button>
+    <div class="content">
+        <ul id="current_selection">
+
+        </ul>
+    </div>
+</footer>
+ 
+<script>
+
+    var sCellsAlreadySelected = []; // Array of [x, y] positions
+
+    var table1 = getReservationTable(0);
+
+    var tbl = document.createElement("table");
+    var tblBody = document.createElement("tbody");
+
+    function est_deja_selectionner(x, y) {
+        let ret = false;
+        sCellsAlreadySelected.forEach(element => {
+            if(element[0] == x && element[1] == y) {
+                ret = true;
+            }
+        });
+        return ret;
+    }
+
+    function suppression_selection(x, y) {
+        let i = 0;
+        sCellsAlreadySelected.forEach(element => {         
+            if(element[0] == x && element[1] == y) {
+                sCellsAlreadySelected.splice(i, 1);
+                return;
+            }
+            i++;
+        });
+    }
+
+    function on_reservation_attempt(x, y) {
+
+        selectedCell = document.getElementById(x + "-" + y);
+
+        // Si notre element est déjà inclus dans la liste, on le vire
+        if(est_deja_selectionner(x, y)) {
+            suppression_selection(x, y);
+            if(table1[y][x] == 1) {
+                selectedCell.innerHTML = "🟢";
+            } else if(table1[y][x] == 2) {
+                selectedCell.innerHTML = "🔴";
+            }
+        }
+        // Sinon on l'ajoute (si elle n'est pas déjà reservé)
+        else {
+            if(table1[y][x] == 1) {
+                selectedCell.innerHTML = "🟡";
+                sCellsAlreadySelected.push([x, y]);
+            }  
+        } 
+
+
+        // Mise à jour de la selection
+
+        var ul = document.getElementById("current_selection");
+        ul.innerHTML = "";
+
+        sCellsAlreadySelected.forEach(element => {
+            let x_pos = element[0];
+            let y_pos = element[1];
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode("Place Standard: " + x_pos + "-" + y_pos));
+            ul.appendChild(li);
+        });
+
+        document.getElementsByClassName("collapsible")[0].innerHTML = "Places sélectionnées (" + sCellsAlreadySelected.length +")"
+    }
+
+    for(var y = 0; y < table1.length; y++) {
+
+        var row = document.createElement("tr");
+
+        for(var x = 0; x < table1[0].length; x++) {
+            var cell = document.createElement("td");
+            cell.setAttribute("onclick", "on_reservation_attempt(" + x + ", " + y + ")");
+            cell.setAttribute("style", "cursor: pointer; font-size: 28px; padding-top: 5px;")
+            cell.setAttribute("id", x + "-" + y);
+            cell.setAttribute("selected", "0");
+
+            var case_str = "";
+            if(table1[y][x] == 1) {
+                case_str = "🟢";
+            } else if(table1[y][x] == 2) {
+                case_str = "🔴";
+            }
+            var cellText = document.createTextNode(case_str);
+
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+
+        tblBody.append(row);
+    }
+    
+
+    tbl.appendChild(tblBody);
+    document.getElementById("reserv_table").appendChild(tbl);
+    tbl.setAttribute("border", "0");
+
+    var coll = document.getElementsByClassName("collapsible");
+
+    var i;
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            } 
+        });
+    }
+
+</script>
+
+</html>
