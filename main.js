@@ -3,13 +3,12 @@
 // For more info, see:
 // https://electronjs.org/docs/api/web-contents
 
-const { session, app, BrowserWindow, webContents } = require('electron')
-const nativeImage = require('electron').nativeImage
+const {session, app, BrowserWindow, webContents} = require('electron')
+const nativeImage = require('electron')
+                        .nativeImage
 
-delete process.env.ELECTRON_ENABLE_SECURITY_WARNINGS
+                    delete process.env.ELECTRON_ENABLE_SECURITY_WARNINGS
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true
-
-
 
 
 
@@ -24,9 +23,9 @@ app.whenReady().then(() => {
             nodeIntegration: true,
             contextIsolation: false,
         }})
-  
 
-  mainWindow.loadFile('index.html')
+
+  mainWindow.loadFile('views/index.html')
   mainWindow.webContents.openDevTools()
   // This setTimeout is to demonstrate the method firing
   // for the demo, and is not needed in production.
@@ -39,5 +38,3 @@ app.whenReady().then(() => {
 */
 }
 )
-
-
