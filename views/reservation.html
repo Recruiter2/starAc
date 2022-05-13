@@ -23,6 +23,18 @@
         font-size: 15px;
     }
 
+    .button_reserv {
+        background-color: rgb(64, 64, 64);
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 30%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+    }
+
     .active, .collapsible:hover {
         background-color: rgb(255, 210, 89);
     }
@@ -68,6 +80,7 @@
  
 <body>
     <h1>Test réservation</h1>
+    <h1 id="nb_pts">Nombres de points: </h1>
     <div id="reserv_table">
         
     </div>
@@ -80,16 +93,26 @@
 
         </ul>
     </div>
+    <br/>
+    <button class="button_reserv" onclick="reserver()">Reserver (0 places) pour 0 points</button>
 </footer>
  
 <script>
 
+    var table1 = [[]];
+    var sNbPoints = 0;
+    // On affiche le nombre de points du spectateur qui reserve
+    db.query("SELECT points FROM spectateur WHERE id_spec = " + window.sessionStorage.getItem("id_spec") + " LIMIT 1",
+        function (err, result, fields) {
+            // if any error while executing above query, throw error
+            if (err) throw err;
+            //
+            document.getElementById("nb_pts").innerHTML = "Nombres de points: " + result[0].points;
+            sNbPoints = result[0].points;
+        }
+    );
+
     var sCellsAlreadySelected = []; // Array of [x, y] positions
-
-    var table1 = getReservationTable(0);
-
-    var tbl = document.createElement("table");
-    var tblBody = document.createElement("tbody");
 
     function est_deja_selectionner(x, y) {
         let ret = false;
@@ -127,6 +150,10 @@
         }
         // Sinon on l'ajoute (si elle n'est pas déjà reservé)
         else {
+            if(sCellsAlreadySelected.length >= 5) {
+                alert("Vous ne pouvez pas réserver plus de 5 places.");
+                return;
+            }
             if(table1[y][x] == 1) {
                 selectedCell.innerHTML = "🟡";
                 sCellsAlreadySelected.push([x, y]);
@@ -147,39 +174,68 @@
             ul.appendChild(li);
         });
 
-        document.getElementsByClassName("collapsible")[0].innerHTML = "Places sélectionnées (" + sCellsAlreadySelected.length +")"
-    }
+        // On change le texte du nombre de place disponible
+        document.getElementsByClassName("collapsible")[0].innerHTML = "Places sélectionnées (" + sCellsAlreadySelected.length +")";
 
-    for(var y = 0; y < table1.length; y++) {
-
-        var row = document.createElement("tr");
-
-        for(var x = 0; x < table1[0].length; x++) {
-            var cell = document.createElement("td");
-            cell.setAttribute("onclick", "on_reservation_attempt(" + x + ", " + y + ")");
-            cell.setAttribute("style", "cursor: pointer; font-size: 28px; padding-top: 5px;")
-            cell.setAttribute("id", x + "-" + y);
-            cell.setAttribute("selected", "0");
-
-            var case_str = "";
-            if(table1[y][x] == 1) {
-                case_str = "🟢";
-            } else if(table1[y][x] == 2) {
-                case_str = "🔴";
-            }
-            var cellText = document.createTextNode(case_str);
-
-            cell.appendChild(cellText);
-            row.appendChild(cell);
+        let requirement = 200 * sCellsAlreadySelected.length;
+        if((sCellsAlreadySelected.length > 0) && (sNbPoints >= requirement)) {
+            document.getElementsByClassName("button_reserv")[0].style.background = "rgb(255, 196, 38)";
+        } else {
+            document.getElementsByClassName("button_reserv")[0].style.background = "rgb(64, 64, 64)";
         }
-
-        tblBody.append(row);
+        document.getElementsByClassName("button_reserv")[0].innerHTML = "Reserver (" + sCellsAlreadySelected.length + " places) pour " + requirement + " points";
     }
-    
 
-    tbl.appendChild(tblBody);
-    document.getElementById("reserv_table").appendChild(tbl);
-    tbl.setAttribute("border", "0");
+    function reserver() {
+        let requirement = 200 * sCellsAlreadySelected.length;
+        if((sCellsAlreadySelected.length > 0) && (sNbPoints >= requirement)) {
+            let id_evt = window.sessionStorage.getItem("id_evt");
+            let id_spec = window.sessionStorage.getItem("id_spec");
+            let sql = "INSERT INTO reservation VALUES ";
+            sCellsAlreadySelected.forEach(element => {
+                let pos_x = element[0];
+                let pos_y = element[1];
+                sql += "(NULL, "+id_evt+", "+id_spec+","+pos_x+","+pos_y+"),";
+            });
+            sql = sql.substring(0, sql.length-1) + ";";
+            db.query(sql);
+            document.location.reload();
+        }
+    }
+
+    getReservationTable(0).then((table) => {
+        var tbl = document.createElement("table");
+        var tblBody = document.createElement("tbody");
+
+        // Generation du tableau de selection des places
+        for(var y = 0; y < table.length; y++) {
+            var row = document.createElement("tr");
+            for(var x = 0; x < table[0].length; x++) {
+                var cell = document.createElement("td");
+                cell.setAttribute("onclick", "on_reservation_attempt(" + x + ", " + y + ")");
+                cell.setAttribute("style", "cursor: pointer; font-size: 28px; padding-top: 5px;")
+                cell.setAttribute("id", x + "-" + y);
+                cell.setAttribute("selected", "0");
+
+                var case_str = "";
+                if(table[y][x] == 1) {
+                    case_str = "🟢";
+                } else if(table[y][x] == 2) {
+                    case_str = "🔴";
+                }
+                var cellText = document.createTextNode(case_str);
+
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+            }
+            tblBody.append(row);
+        }
+        
+        tbl.appendChild(tblBody);
+        document.getElementById("reserv_table").appendChild(tbl);
+        tbl.setAttribute("border", "0");
+        table1 = table;
+    });
 
     var coll = document.getElementsByClassName("collapsible");
 
@@ -195,6 +251,9 @@
             } 
         });
     }
+
+    //
+    
 
 </script>
 
