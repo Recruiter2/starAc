@@ -57,8 +57,8 @@ table.TableCSS thead th:first-child {
 }
 
 .section {
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 section {
@@ -67,13 +67,15 @@ section {
 }
 
 form {
-  padding-left: 100px;
-  margin-left: 500;
+  padding-top: 5%;
+  margin-top: 5%;
   margin: 0 auto;
-  width: 700px;
+  width: max-content;
 }
 
 .button2 {
+  margin-top: 2%;
+  padding-top: 25%;
   background-color: rgb(253, 194, 1);
   padding: 8px 18px;
   border: none;
@@ -148,4 +150,9 @@ header{
 
 input {
     margin: .4rem;
+}
+
+.center {
+  justify-content: center;
+  text-align: center;
 }

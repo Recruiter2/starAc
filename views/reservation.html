@@ -7,7 +7,7 @@
         text-align: center;
         font-family: Arial, Helvetica, sans-serif;
     }
-    table {
+    #reserv_table table {
         margin-left: auto;
         margin-right: auto;
     }
@@ -16,6 +16,7 @@
         color: white;
         cursor: pointer;
         padding: 18px;
+        margin-bottom: 10px;
         width: 30%;
         border: none;
         text-align: left;
@@ -23,7 +24,7 @@
         font-size: 15px;
     }
 
-    .button_reserv {
+    .button_reserv, .button_return {
         background-color: rgb(64, 64, 64);
         color: white;
         cursor: pointer;
@@ -64,22 +65,24 @@
         text-align: left;
     }
 
-    table {
+    #reserv_table table {
         border-collapse: separate;
         border-spacing: 10px;
         *border-collapse: expression('separate', cellSpacing='10px');
     }
+
 </style>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src='scripts/reservation.js'> </script>
-    <title>Test Résérvation</title>
+    <title>Réservation de place</title>
 </head>
  
 <body>
-    <h1>Test réservation</h1>
+    <button class="button_return" onclick="window.history.go(-1);">Retour</button>
+    <h1>Réservation de place</h1>
     <h1 id="nb_pts">Nombres de points: </h1>
     <div id="reserv_table">
         
@@ -93,7 +96,12 @@
 
         </ul>
     </div>
-    <br/>
+    <button class="collapsible">Places que vous avez déjà réserver</button>
+    <div class="content">
+        <ul id="already_selected">
+
+        </ul>
+    </div>
     <button class="button_reserv" onclick="reserver()">Reserver (0 places) pour 0 points</button>
 </footer>
  
@@ -112,8 +120,24 @@
         }
     );
 
+    // On affiche les places déjà reserver
+    db.query("SELECT posX, posY FROM reservation WHERE id_spec = " + window.sessionStorage.getItem("id_spec"),
+        function (err, result, fields) {
+            // if any error while executing above query, throw error
+            if (err) throw err;
+            //
+            result.forEach(element => {
+                var ul = document.getElementById("already_selected");
+                var li = document.createElement("li");
+                li.appendChild(document.createTextNode("Place Standard: " + String.fromCharCode(0x41 + element.posY) + "-" + element.posX));
+                ul.appendChild(li);
+            });
+        }
+    );
+
     var sCellsAlreadySelected = []; // Array of [x, y] positions
 
+    // Retourne si la case [x, y] est déjà séléctionnée
     function est_deja_selectionner(x, y) {
         let ret = false;
         sCellsAlreadySelected.forEach(element => {
@@ -124,6 +148,7 @@
         return ret;
     }
 
+    // Supprime la case [x, y] du tableau (si elle existe)
     function suppression_selection(x, y) {
         let i = 0;
         sCellsAlreadySelected.forEach(element => {         
@@ -135,6 +160,7 @@
         });
     }
 
+    // Quand l'utilsateur appui sur un bouton, cette fonction est appelée (NE PAS RENOMMER)
     function on_reservation_attempt(x, y) {
 
         selectedCell = document.getElementById(x + "-" + y);
@@ -170,7 +196,7 @@
             let x_pos = element[0];
             let y_pos = element[1];
             var li = document.createElement("li");
-            li.appendChild(document.createTextNode("Place Standard: " + x_pos + "-" + y_pos));
+            li.appendChild(document.createTextNode("Place Standard: " + String.fromCharCode(0x41 + y_pos) + "-" + x_pos));
             ul.appendChild(li);
         });
 
@@ -186,9 +212,11 @@
         document.getElementsByClassName("button_reserv")[0].innerHTML = "Reserver (" + sCellsAlreadySelected.length + " places) pour " + requirement + " points";
     }
 
+    // Quand l'utilsateur appuie sur le bouton pour reserver ses places, cette fonction est appelée
     function reserver() {
         let requirement = 200 * sCellsAlreadySelected.length;
         if((sCellsAlreadySelected.length > 0) && (sNbPoints >= requirement)) {
+            enlevePoints(requirement);
             let id_evt = window.sessionStorage.getItem("id_evt");
             let id_spec = window.sessionStorage.getItem("id_spec");
             let sql = "INSERT INTO reservation VALUES ";
@@ -203,13 +231,28 @@
         }
     }
 
+    // On rempli le tableau des places qui peuvent etre reservé
     getReservationTable(0).then((table) => {
         var tbl = document.createElement("table");
         var tblBody = document.createElement("tbody");
 
+        var upper_text = document.createElement("tr");
+        var side_text = document.createElement("td");
+        side_text.innerHTML = "";
+        upper_text.appendChild(side_text);
+        for(var j = 0; j < table.length; j++) {
+            side_text = document.createElement("td");
+            side_text.innerHTML = j;
+            upper_text.appendChild(side_text);
+        }
+        tblBody.append(upper_text);
+
         // Generation du tableau de selection des places
         for(var y = 0; y < table.length; y++) {
             var row = document.createElement("tr");
+            var side_text =document.createElement("td");
+            side_text.innerHTML = String.fromCharCode(0x41 + y);
+            row.appendChild(side_text);
             for(var x = 0; x < table[0].length; x++) {
                 var cell = document.createElement("td");
                 cell.setAttribute("onclick", "on_reservation_attempt(" + x + ", " + y + ")");
@@ -237,8 +280,9 @@
         table1 = table;
     });
 
-    var coll = document.getElementsByClassName("collapsible");
 
+    // Gestion du bouton et de l'animation du tableau
+    var coll = document.getElementsByClassName("collapsible");
     var i;
     for (i = 0; i < coll.length; i++) {
         coll[i].addEventListener("click", function() {

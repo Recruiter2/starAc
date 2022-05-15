@@ -1,59 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <title>index</title>
-    <script type="text/javascript" src='scripts/spectateur.js'> </script>
-    <link rel="stylesheet" href="styles.css" />
-</head>
+    <head>
+        <title>index</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src='scripts/spectateur.js'> </script>
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://preview.colorlib.com/theme/bootstrap/login-form-20/css/A.style.css.pagespeed.cf.eQk9-CoeFP.css">
+    </head>
 
-<body>
-    </style>
-    <header>
-        <input
-    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();"
-    />
-        <input
-    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();"
-    />
-  </header>
+    <!-- https://preview.colorlib.com/theme/bootstrap/login-form-20/images/xbg.jpg.pagespeed.ic.tiVxeakBSd.webp -->
 
-    <h1> CONNEXION SPECTATEUR</h1>
-    <div>
-        <fieldset>
-        <h2> SE CONNECTER : </h2>
-        <form>
-
-            <div>
-                <label for="choose">Nom :</label>
-                <input id="nom"  name="nom" required minlength="3" maxlength="25">
-    </div>
-            <div>
-                <label for="choose">Mot de passe :</label>
-                <input id="mdp" type="password" name="mdp" required minlength="3" maxlength="10">
-    </div>
-            <div>
-        <input 
-            value="CONNEXION" type="button" onclick="SpectateurConnexion(nom.value,mdp.value);" 
-        />
+    <body class="img js-fullheight" style="background-image:url(https://preview.colorlib.com/theme/bootstrap/login-form-20/images/xbg.jpg.pagespeed.ic.tiVxeakBSd.webp)">
+        <section class="ftco-section">
+            <div class="container">
+            <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+            <h2 class="heading-section">Login Spectateur</h2>
             </div>
-        </form>
-        </fieldset>
-    </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <div>
+            </div>
+            <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+            <div class="login-wrap p-0">
+                <h3 class="mb-4 text-center">Avez-vous un compte?</h3>
+                <form action="#" class="signin-form">
+                    <div class="form-group">
+                        <input minlength="3" maxlength="25" id="nom" name="nom" type="text" class="form-control" placeholder="Nom" required>
+                    </div>
+                    <div class="form-group">
+                        <input minlength="3" maxlength="10" id="mdp" name="mdp" type="password" class="form-control" placeholder="Mot de passe" required>
+                        <span toggle="#mdp" class="fa fa-fw fa-eye-slash field-icon toggle-password" id="passEye"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Se connecter" class="form-control btn btn-primary submit px-3" onclick="SpectateurConnexion(nom.value,mdp.value);">
+                    </div>
+                </form>
+                <button class="form-control btn btn-primary submit px-3" onclick="document.location.replace('spectateurcreecompte.html')">Créer un compte</button>
+            </div>
+            </div>
+            </div>
+            </div>
+        </section>
+    </body>
 
-        <form action="spectateurcreecompte.html">
-            <input type="submit" value="Creer un compte spectateur" />
-</form>
-    </div>
+    <!-- Beaucoup de retour à la ligne pour eviter un rectangle vide/blanc en bas de page.. -->
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 
+    <script>
+        const togglePassword = document.querySelector("#passEye");
+        const password = document.querySelector("#mdp");
 
-</body>
+        togglePassword.addEventListener("click", function () {
+            // toggle the type attribute
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+            
+            // toggle the icon
+            if(type === "password") {
+                togglePassword.setAttribute("class", togglePassword.getAttribute("class").replace("fa-eye", "fa-eye-slash"));
+            } else {
+                togglePassword.setAttribute("class", togglePassword.getAttribute("class").replace("fa-eye-slash", "fa-eye"));
+            }
+        });
+    </script>
 
 </html>
