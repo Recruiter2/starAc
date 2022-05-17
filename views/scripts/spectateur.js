@@ -19,14 +19,43 @@ db.connect(function (err) {
 });
 
 
+function getSrcImage() {
+  var res = window.sessionStorage.getItem("img_spect");
+  return res;
+}
 
 
+function getID() {
+  var res = window.sessionStorage.getItem("id_spec");
+  return res;
+}
 
 function getNomSpect() {
   var res = window.sessionStorage.getItem("name_spect");
   return res;
 }
 
+
+function getPointsSpec() {
+  majPointsSpec();
+  var res = window.sessionStorage.getItem("points_spec");
+  return res;
+}
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+function majPointsSpec() {
+  id = window.sessionStorage.getItem("id_spec");
+  var request = "SELECT points FROM `spectateur` WHERE id_spec=" + id;
+  db.query(request,
+    function (err, result, fields) {
+      window.sessionStorage.setItem("points_spec", result[0].points);
+    });
+
+
+}
 ////////////////////////////////RESERVATION//////////////////////////////////////////////////
 
 
@@ -88,7 +117,6 @@ function ShowEve() {
       document.getElementById('gauche').innerHTML = "CHOISIR EVENEMENT  : ";
       var selectList = document.createElement("select");
       selectList.id = "mySelect";
-      document.getElementById('gauche').appendChild(selectList);
       //Create and append the options
       for (var i = 0; i < result.length; i++) {
         if (result[i].etat != 2) {
@@ -112,7 +140,9 @@ function ShowEve() {
       but.type = "button";
       but.value = "ACTUALISER";
       but.setAttribute('onclick', "tableauSpectacle(0)");
+      document.getElementById('gauche').appendChild(selectList);
       document.getElementById('gauche').appendChild(but);
+
     });
 }
 
@@ -506,11 +536,13 @@ function spectateurCreeCompte(nom, prenom, mail, mdp1, mdp2, date) {
 
 function SpectateurConnexion(nom, mdp) {
   var res = null;
-  db.query("SELECT * FROM `spectateur` WHERE nom = '"+nom+"' && password ="+mdp,
+  console.log("SELECT * FROM `spectateur` INNER JOIN image on spectateur.id_img = image.id WHERE nom = '" + nom + "' && password ='" + mdp + "'");
+  db.query("SELECT * FROM `spectateur` INNER JOIN image on spectateur.id_img = image.id WHERE nom = '" + nom + "' && password ='" + mdp + "'",
     function (err, result, fields) {
       // if any error while executing above query, throw error
       if (err) throw err;
       if (result.length != 0) {
+        window.sessionStorage.setItem("img_spect", result[0].src);
         window.sessionStorage.setItem("name_spect", result[0].nom);
         window.sessionStorage.setItem("id_spec", result[0].id_spec);
         window.location.replace("spectateur.html");
@@ -550,6 +582,9 @@ function choixS(value) {
   }
   else if (value == "1") {
     window.location.assign("modifCompteS.html");
+  }
+  else if (value == "3") {
+    window.location.assign("specPaye.html");
   }
 }
 /////////////////////////////////////////////////////////////////////////////////
@@ -779,7 +814,7 @@ function ajouteNote(note, id_p) {
       }
       else {
         var dBnote = "UPDATE `note` SET note=" + note + " WHERE id_participant = " + id_p + "&& id_user=" + idSpec;
-        alert("Vous avez modifié votre note, vous avez mis " + note);
+        alert("Vous avez modifié votre note, vous avez mis :" + note);
       }
       db.query(dBnote,
         function (err, result, fields) {
@@ -791,11 +826,162 @@ function ajouteNote(note, id_p) {
 
 
 
-function rajoutePoints(points){
+function rajoutePoints(points) {
   var id_spec = window.sessionStorage.getItem("id_spec");
-  var request ="UPDATE `spectateur` SET `points`=points + "+points+" WHERE id_spec = "+id_spec;
+  var request = "UPDATE `spectateur` SET `points`=points + " + points + " WHERE id_spec = " + id_spec;
   db.query(request,
     function (err, result, fields) {
       if (err) throw err;
     });
 }
+
+////////////////////////////////////////////////////////////FIDELITE//////////////////////////
+function assezPoints(cond, pts) {
+  var points = getPointsSpec();
+  var but = document.createElement("input");
+  but.type = "button";
+  if (points >= pts) {
+    but.value = "ACHETER";
+    but.classList.add("BUTTON_JAUNE");
+    if (cond == 1) {
+      but.setAttribute('onclick', "rdv()");
+    }
+    else if (cond == 2) {
+      but.setAttribute('onclick', "acheteBiere()");
+    }
+    else if (cond == 3) {
+      but.setAttribute('onclick', "afficheImage()");
+    }
+  }
+  else {
+    but.value = "BLOQUE";
+    but.classList.add("BUTTON_GRIS");
+  }
+  document.getElementById(cond).appendChild(but);
+}
+
+function rdv() {
+  document.getElementById('demande').remove();
+  div = document.createElement('demande');
+  div.id='demande';
+  document.getElementById("sec").appendChild(div);
+  var request = "SELECT * FROM `artiste`";
+  db.query(request,
+    function (err, result, fields) {
+      if (err) throw err;
+      var selectList = document.createElement("select");
+      selectList.id = "artisteSelect";
+      var option = document.createElement("option");
+      option.value = 0;
+      option.text = "---Choisir un artiste---";
+      selectList.appendChild(option);
+      for (var i = 0; i < result.length; i++) {
+        var option = document.createElement("option");
+        option.value = result[i].id;
+        option.text = result[i].nom;
+        selectList.appendChild(option);
+      }
+
+      var but = document.createElement("input");
+      but.type = "button";
+      but.value = "VALIDER";
+      but.setAttribute('onclick', "prendRdv()");
+      but.classList.add("button");
+      div.appendChild(selectList);
+      div.appendChild(but);
+      div.classList.add("encadrer");
+      document.getElementById("sec").appendChild(div);
+    });
+}
+function prendRdv(){
+  var id_art = document.getElementById("artisteSelect").value;
+  var id = getID();
+  if (id_art!=0){
+    var request = "INSERT INTO `rdv`(`id_artiste`, `id_spec`) VALUES ("+id_art+","+id+")";
+    db.query(request,
+      function (err, result, fields) {
+        if (err) throw err;
+        rajoutePoints(-1000);
+        alert("Une demande a été envoyé à l'artiste");
+        window.sessionStorage.removeItem("points_spec");
+        window.location.assign("specPaye.html");
+      });
+  }
+}
+
+
+
+
+function acheteBiere() {
+  window.sessionStorage.removeItem("points_spec");
+  rajoutePoints(-100);
+  window.open('https://static.lexpress.fr/medias_8870/w_968,h_545,c_fill,g_north/v1393340206/code-barres_4541778.jpg');
+  window.location.assign("specPaye.html");
+
+
+}
+
+function afficheImage() {
+  document.getElementById('demande').remove();
+  var div = document.createElement("div");
+  div.id = "demande";
+  div.classList.add("encadrer");
+  document.getElementById("sec").appendChild(div);
+  var request = "SELECT * FROM `image` WHERE id != 1";
+  db.query(request,
+    function (err, result, fields) {
+      if (err) throw err;
+      for (var i = 0; i < result.length; i++) {
+        userPossedeIm(i, result[i].src);
+      }
+    });
+}
+
+function userPossedeIm(id_im, src) {
+  var request2 = "SELECT * FROM `image_spec` WHERE `id_spec`=" + id + " && id_image=" + id_im;
+  console.log(request2);
+  db.query(request2,
+    function (err, result2, fields) {
+      if (err) throw err;
+      if (result2.length == 0) {
+        var img = document.createElement("img");
+        img.src = "" + src;
+        img.style.width = "150px";
+        img.id = id;
+        img.style.height = "150px";
+        img.setAttribute('onclick', "buttonImage("+""+ id_im + ",'" + src + "')");
+        document.getElementById("demande").appendChild(img);
+        console.log("passe");
+      }
+    });
+}
+
+function buttonImage(id_im,src){
+  document.getElementById('butValid').remove();
+  var but = document.createElement("input");
+  but.type = "button";
+  but.value = "ACHETER IMAGE "+id_im;
+  but.id='butValid';
+  but.setAttribute('onclick', "acheteIm("+""+ id_im + ",'" + src + "');");
+  but.classList.add("button");
+  document.getElementById('demande').appendChild(but);
+
+}
+
+function acheteIm(id_im, src) {
+  var id = getID();
+  console.log("passe");
+  var request = "INSERT INTO `image_spec`(`id_spec`, `id_image`) VALUES (" + id + "," + id_im + ")";
+  db.query(request,
+    function (err, result, fields) {
+      if (err) throw err;
+    });
+  var request2 = "UPDATE `spectateur` SET `id_img`=" + id_im + " WHERE id_spec=" + id;
+  db.query(request2,
+    function (err, result2, fields) {
+      window.sessionStorage.setItem("img_spect", "" + src);
+      rajoutePoints(-50);
+      window.location.assign("specPaye.html");
+    });
+}
+

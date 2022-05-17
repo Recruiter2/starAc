@@ -3,7 +3,7 @@
 const mysql = require('mysql');
 //const session = require('electron');
 
-  const db = mysql.createConnection({
+const db = mysql.createConnection({
   port: 1183,
   host: "localhost",
   user: "l2_info_3",
@@ -211,11 +211,11 @@ function info(txt, id) {
         console.log(grpeDB);
         db.query(grpeDB,
           function (err, result2, fields) {
-            
+
             for (var i = 0; i < result2.length; i++) {
               console.log(i);
               var msg = "INSERT INTO `info`( `texte`, `id_artiste`) VALUES ('" + txt + "'," + result2[i].id_membre + ")";
-             
+
               db.query(msg,
                 function (err, result3, fields) { });
             }
@@ -232,9 +232,9 @@ function info(txt, id) {
 }
 
 
-function supprParEve2(id){
-    info("VOUS AVEZ ETE SUPPRIME D UN EVENEMENT : (id) = "+id, id);
-    suprParticipEve(id);
+function supprParEve2(id) {
+  info("VOUS AVEZ ETE SUPPRIME D UN EVENEMENT : (id) = " + id, id);
+  suprParticipEve(id);
 }
 
 function suprParticipEve(id) {
@@ -435,40 +435,55 @@ function TabEve() {
 
 
 function lanceEvenements(val) {
-  db.query("SELECT * FROM `evenements` WHERE 1",
+  db.query("SELECT * FROM `evenements` WHERE etat =" + val,
     function (err, result, fields) {
       // if any error while executing above query, throw error
       if (err) throw err;
       // if there is no error, you have the result
       var tbl = document.createElement("table");
+      tbl.id = "tbl" + val;
       var tblBody = document.createElement("tbody");
       var tblHead = document.createElement("thead");
+      if (result.length != 0) {
+        if (val != 2) {
 
-      var row = document.createElement("tr");
-      var cell = document.createElement("td");
-      var cellText = document.createTextNode("id");
-      cell.appendChild(cellText);
-      row.appendChild(cell);
+          var row = document.createElement("tr");
+          var cell = document.createElement("td");
+          var cellText = document.createTextNode("id");
+          cell.appendChild(cellText);
+          row.appendChild(cell);
 
-      var cell = document.createElement("td");
-      var cellText = document.createTextNode("Nom");
-      cell.appendChild(cellText);
-      row.appendChild(cell);
+          var cell = document.createElement("td");
+          var cellText = document.createTextNode("Nom");
+          cell.appendChild(cellText);
+          row.appendChild(cell);
 
-      var cell = document.createElement("td");
-      var cellText = document.createTextNode("Date");
-      cell.appendChild(cellText);
-      row.appendChild(cell);
+          var cell = document.createElement("td");
+          var cellText = document.createTextNode("Date");
+          cell.appendChild(cellText);
+          row.appendChild(cell);
 
 
 
-      var cell = document.createElement("td");
-      row.appendChild(cell);
-      tblHead.appendChild(row);
-      tbl.appendChild(tblHead);
+          var cell = document.createElement("td");
+          row.appendChild(cell);
+          tblHead.appendChild(row);
+          tbl.appendChild(tblHead);
+        }
+        else {
+          var row = document.createElement("tr");
+          var cell = document.createElement("td");
+          var cellText = document.createTextNode("-----------------");
+          cell.appendChild(cellText);
+          row.appendChild(cell);
+          row.appendChild(cell);
+          row.appendChild(cell);
+          row.appendChild(cell);
+          tblHead.appendChild(row);
+          tbl.appendChild(tblHead);
+        }
+        for (var i = 0; i < result.length; i++) {
 
-      for (var i = 0; i < result.length; i++) {
-        if (result[i].etat == val) {
           var row = document.createElement("tr");
           var cell = document.createElement("td");
           var cellText = document.createTextNode(result[i].id_evt);
@@ -487,29 +502,43 @@ function lanceEvenements(val) {
 
           var cell = document.createElement("td");
           var but = document.createElement("input");
-
+          but.type = "button";
           if (result[i].etat == 0) {
-            but.type = "button";
+
             but.value = "LANCER";
             but.setAttribute('onclick', "modifEtatEvt(1," + result[i].id_evt + ")");
           }
           else if (result[i].etat == 1) {
-            but.type = "button";
+
             but.value = "STOP";
             but.setAttribute('onclick', "modifEtatEvt(2," + result[i].id_evt + ")");
           }
-          else {
+          else if (result[i].etat == 2) {
+            var but = document.createElement("input");
             but.type = "button";
+            but.value = "CALCUL";
+            but.setAttribute('onclick', "modifEtatEvt(3," + result[i].id_evt + ")");
+          }
+          else {
             but.value = "REMETTRE";
             but.setAttribute('onclick', "modifEtatEvt(0," + result[i].id_evt + ")");
           }
           cell.appendChild(but);
           row.appendChild(cell);
-        }
 
-        tblBody.appendChild(row);
+          tblBody.appendChild(row);
+        }
+        tbl.appendChild(tblBody);
       }
-      tbl.appendChild(tblBody);
+      else{ 
+      var row = document.createElement("tr");
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode("------AUCUN GROUPE------");
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+      tblHead.appendChild(row);
+      tbl.appendChild(tblHead);
+      }
       tbl.classList.add("TableCSS");
       if (val == 0) {
         document.getElementById("gauche").appendChild(tbl);
@@ -517,12 +546,16 @@ function lanceEvenements(val) {
       else if (val == 1) {
         document.getElementById("droite").appendChild(tbl);
       }
-      else {
+      else if (val == 3) {
         var br = document.createElement("br");
         for (var j = 0; j < 4; j++)
           document.getElementById("gauche").appendChild(br);
         document.getElementById("gauche").appendChild(tbl);
       }
+      else {
+        document.getElementById("droite").appendChild(tbl);
+      }
+
     });
 
 }
@@ -530,19 +563,37 @@ function lanceEvenements(val) {
 function modifEtatEvt(etat, id_evt) {
   var modifDB = "UPDATE `evenements` SET `etat`=" + etat + " WHERE id_evt = " + id_evt;
   //console.log(modifDB);
-  
+  if (etat == 2) {
+    finEve(id_evt);
+  }
+
+  if (etat == 3) {
+    metPointsUser(id_evt);
+  }
+
   db.query(modifDB,
     function (err, result, fields) {
       if (err) throw err;
-      window.location.assign('adminLanceEvenement.html');
     });
 
-    if (etat==2){
-      finEve(id_evt);
-    }
+  for (var i = 0; i < 4; i++) {
+    document.getElementById("tbl" + i).remove();
+    lanceEvenements(i);
+  }
 
 }
 
+function modifEtatMSG(etat, id) {
+  var modifDB = "UPDATE `message` SET `etat`=" + etat + " WHERE id_message = " + id;
+  console.log(modifDB);
+  db.query(modifDB,
+    function (err, result, fields) {
+      if (err) throw err;
+      window.location.assign('message.html');
+    });
+
+
+}
 
 function afficheMessage() {
   db.query("SELECT * FROM `message` WHERE 1",
@@ -618,46 +669,69 @@ function afficheMessage() {
     });
 
 }
-
-
-function modifEtatMSG(etat, id) {
-  var modifDB = "UPDATE `message` SET `etat`=" + etat + " WHERE id_message = " + id;
-  console.log(modifDB);
-  db.query(modifDB,
-    function (err, result, fields) {
-      if (err) throw err;
-      window.location.assign('message.html');
-    });
-
-
-}
-
 //////////////////////FIN EVENEMENTS ACTION///////////////////////////
 
-function finEve(id_evt){
-  var request2 ="";
-  db.query(request,
+function finEve(id_evt) {
+  var request2 = "SELECT * FROM participe INNER JOIN note on participe.id_participant = note.id_participant WHERE participe.id_evt=" + id_evt;
+  db.query(request2,
     function (err, result2, fields) {
       if (err) throw err;
-      
-    });
-
-  // ON ATTRIBUE LES POINTS AUX SPECTATEURS QUI ONT PARTICIPE
-  var request ="SELECT DISTINCT `id_spec` FROM `pronostic` WHERE id_evt ="+id_evt;
-  db.query(request,
-    function (err, result, fields) {
-      if (err) throw err;
-      for (var i=0;i<result.length;i++){
-        calcul(result[i].id_spec,id_evt);
+      for (var i = 0; i < result2.length; i++) {
+        metDansClassement(id_evt, result2[i].id_participant);
       }
     });
 }
 
-function calcul(id_spec,id_evt){
-  var request = "SELECT * FROM `gagnants` LEFT JOIN pronostic on gagnants.id_evt = pronostic.id_evt && gagnants.position=pronostic.pos && gagnants.id_part = pronostic.id_p WHERE pronostic.id_evt = " + id_evt + " && pronostic.id_spec = " + id_spec;
+function metDansClassement(id_evt, id_p) {
+  var request = "SELECT * FROM `note` WHERE id_participant =" + id_p;
+  console.log(request);
   db.query(request,
     function (err, result, fields) {
       if (err) throw err;
+      var note = 0;
+      if (result.length != 0) {
+        for (var i = 0; i < result.length; i++) {
+          note = result[i].note + note;
+        }
+        note = note / result.length;
+        var request2 = "INSERT INTO `classement`(`id_evt`, `id_part`, `note`) VALUES (" + id_evt + "," + id_p + "," + note + ")";
+        console.log(request2);
+        db.query(request2,
+          function (err, result, fields) {
+            if (err) throw err;
+
+          });
+      }
+    });
+}
+
+
+
+
+
+function metPointsUser(id_evt) {
+  gereGagnant(id_evt);
+  // ON ATTRIBUE LES POINTS AUX SPECTATEURS QUI ONT PARTICIPE
+  var request = "SELECT DISTINCT `id_spec` FROM `pronostic` WHERE id_evt =" + id_evt;
+  db.query(request,
+    function (err, result, fields) {
+      if (err) throw err;
+      for (var i = 0; i < result.length; i++) {
+        calcul(result[i].id_spec, id_evt);
+      }
+
+    });
+}
+
+function calcul(id_spec, id_evt) {
+
+
+  var request = "SELECT * FROM `gagnants` LEFT JOIN pronostic on gagnants.id_evt = pronostic.id_evt && gagnants.position=pronostic.pos && gagnants.id_part = pronostic.id_p WHERE pronostic.id_evt = " + id_evt + " && pronostic.id_spec = " + id_spec;
+  console.log(request);
+  db.query(request,
+    function (err, result, fields) {
+      if (err) throw err;
+      console.log(result.length);
       var note = 0;
       for (var i = 0; i < result.length; i++) {
         if (result[i].pos == 1) {
@@ -671,14 +745,41 @@ function calcul(id_spec,id_evt){
         }
       }
       note = note * result.length;
-      rajoutePoints(note,id_spec);
-});
+      rajoutePoints(note, id_spec);
+      console.log(note);
+    });
 }
 
-function rajoutePoints(points){
-  var request ="UPDATE `spectateur` SET `points`=points + "+points+" WHERE id_spec = "+id_spec;
+function rajoutePoints(points, id_spec) {
+  var request = "UPDATE `spectateur` SET `points`=points + " + points + " WHERE id_spec =" + id_spec;
+  console.log(request);
   db.query(request,
     function (err, result, fields) {
       if (err) throw err;
+
     });
 }
+
+
+
+
+function gereGagnant(id_evt) {
+
+  var request = "SELECT * FROM `classement` WHERE id_evt=" + id_evt + " LIMIT 3";
+  console.log(request);
+  db.query(request,
+    function (err, result, fields) {
+      if (err) throw err;
+      for (var i = 0; i < result.length; i++) {
+        var pos = i + 1;
+        var request2 = "INSERT INTO `gagnants`(`id_part`, `id_evt`, `position`) VALUES (" + result[i].id_part + "," + id_evt + "," + pos + ")";
+        console.log(request2);
+        db.query(request2, function (err, result, fields) {
+          if (err) throw err;
+
+        });
+      }
+    });
+}
+
+

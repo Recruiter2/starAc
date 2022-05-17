@@ -22,6 +22,15 @@ db.connect(
 
 
 
+  function getSrcImage() {
+    var res = window.sessionStorage.getItem("img_spect");
+    return res;
+  }
+
+  function getID() {
+    var res = window.sessionStorage.getItem("id_spec");
+    return res;
+  }
 // artisteOuSpectateur => 1 -> ARTISTE
 //                        0 -> SPECTATEUR
 function showModifCompte(artisteOuSpectateur) {
@@ -36,7 +45,7 @@ function showModifCompte(artisteOuSpectateur) {
   db.query(dbSA,
     function (err, result, fields) {
       if (err) throw alert("Error");
-
+      console.log(result);
       if (document.getElementById('nom') == null) {
         var input = document.createElement("input");
         input.id = "prenom";
@@ -70,6 +79,13 @@ function showModifCompte(artisteOuSpectateur) {
         input.name = "Mot de passe :";
         input.value = result[0].password;
         document.getElementById('5').appendChild(input);
+        if (artisteOuSpectateur==0){
+          var img = document.createElement("img");
+          img.src = '' + getSrcImage();
+          img.style.width = "150px";
+          img.style.height = "150px";
+          document.getElementById('6').appendChild(img);
+          }
       }
 
     });
@@ -140,4 +156,36 @@ function choixA(value) {
   else if (value == "1") {
     window.location.assign("modifCompteA.html");
   }
+}
+
+
+function appartientPhoto(){
+  var id = getID();
+  var request = "SELECT * FROM `image_spec` INNER JOIN image on image_spec.id_image = image.id WHERE `id_spec`="+id +" && image.id!=1";
+  db.query(request,
+    function (err, result, fields) {
+      var div = document.createElement('div');
+      div.id ='droite';
+      div.classList.add="encadrer";
+      for (var i=0;i<result.length;i++){
+      var img = document.createElement("img");
+      img.src = '' + result[i].src;
+      img.style.width = "150px";
+      img.style.height = "150px";
+      img.setAttribute('onclick', "changeImage("+result[i].id +",'"+result[i].src+"')");
+      div.appendChild(img);
+      }
+      document.body.appendChild(div);
+    });
+}
+
+function changeImage(id_img, src){
+  window.sessionStorage.setItem("img_spect",''+src);
+  id = getID();
+  var request ="UPDATE `spectateur` SET `id_img`="+id_img+" WHERE id_spec="+id;
+  db.query(request,
+    function (err, result, fields) {
+      window.location.assign("modifCompteS.html");
+});
+
 }

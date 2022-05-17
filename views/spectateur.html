@@ -26,10 +26,10 @@
     <label for="choose-select"></label>
 
     <select name="choose" id="choose-select" onclick="choixS(value);">
-    <option value="">--Please choose an option--</option>
-    <option value="1">Modifier compte</option>
-    <option value="2">Deconnexion</option>
-
+      <option value="">--Please choose an option--</option>
+      <option value="1">Modifier compte</option>
+      <option value="3">Points de fidélités</option>
+      <option value="2">Deconnexion</option>
     </select>
   </header>
 
@@ -40,9 +40,15 @@
     </script>
   </h3>
   <br/>
-  <p> <img id="logoImg" src="" width="20%"> </p>
+  <p id="p"><script>
+    var img = document.createElement("img");
+    img.src = ""+getSrcImage();
+    img.style.width = "100px";
+    img.style.height = "100px";
+    document.getElementById("p").appendChild(img);
+</script> </p>
 
-  <h2>Default</h2>
+  <h2>Evenements</h2>
 
   <div id="gauche">
 
@@ -82,13 +88,7 @@
 
 
 
-  <script type="text/javascript">
-    const {nativeImage} = require('electron');
-          let logo = nativeImage.createFromPath('/Users/yvann/OneDrive/Images/logo.png');
-          //let taille = logo.getSize();
-          //logo = logo.resize({width :taille/8, heigth :taille/8})
-          let logoImg = document.getElementById('logoImg').src= logo.toDataURL();
-  </script>
+
 
   <footer>
 
