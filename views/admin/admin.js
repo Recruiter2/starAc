@@ -48,10 +48,11 @@ function connexionAdmin(nom, mdp) {
   });
 }
 function SuppEv(id) {
-  var sql = "DELETE FROM `evenements` WHERE id_evt='" + id + "'";
+  var sql = "DELETE FROM `evenements` WHERE `evenements`.`id_evt` = " + id + "";
 
   db.query(sql, function (err, result) {
     if (err) alert("ERREUR");
+    
     else {
       alert("DELETED");
       window.location.assign('SupprEvenement.html');
@@ -422,7 +423,8 @@ function TabEve() {
       }
       // put the <tbody> in the <table>
       tbl.appendChild(tblBody);
-      tbl.classList.add("TableCSS")
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
+      tblHead.classList.add("table-primary");
       document.getElementById('haut').appendChild(tbl);
 
 
