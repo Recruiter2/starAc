@@ -1,222 +1,303 @@
-table.TableCSS {
-  font-family: Verdana, Geneva, sans-serif;
-  border: 1px solid #FFFFFF;
-  width: 50%;
-  height: 50%;
-  text-align: center;
-  border-collapse: collapse;
-}
-table.TableCSS td, table.TableCSS th {
-  border: 3px solid #FFFFFF;
-  padding: 3px 3px;
-}
-table.TableCSS tbody td {
-  font-size: 15px;
-  color: #333333;
-}
-table.TableCSS td:nth-child(even) {
-  background: #EBEBEB;
-}
-table.TableCSS thead {
-  background: #FFFFFF;
-  border-bottom: 4px solid #333333;
-}
-table.TableCSS thead th {
-  font-size: 15px;
-  font-weight: bold;
-  color: #333333;
-  text-align: center;
-  border-left: 2px solid #333333;
-}
-table.TableCSS thead th:first-child {
-  border-left: none;
-}
+ .encadrer {
+   font-size: 175%;
+   margin-top: 5%;
+   text-align: center;
+   margin: auto;
+   width: 60%;
+   border: 4px solid black;
+   padding: 3%;
+ }
 
-.section {
-  margin-left: 100px;
-  margin-right: 100px;
-}
+ table.TableCSS {
+   font-family: Verdana, Geneva, sans-serif;
+   border: 1px solid #FFFFFF;
+   width: 50%;
+   height: 50%;
+   text-align: center;
+   border-collapse: collapse;
+ }
 
-section {
-  max-height: 80%;
-  margin-bottom: 100px;
-}
+ table.TableCSS td,
+ table.TableCSS th {
+   border: 3px solid #FFFFFF;
+   padding: 3px 3px;
+ }
 
-form {
-  padding-left: 100px;
-  margin-left: 500;
-  margin: 0 auto;
-  width: 700px;
-}
+ table.TableCSS tbody td {
+   font-size: 15px;
+   color: #333333;
+ }
 
-.button {
-  background-color: rgb(253, 194, 1);
-  padding: 8px 18px;
-  border: none;
-}
+ table.TableCSS td:nth-child(even) {
+   background: #EBEBEB;
+ }
 
-#gauche2{
-    float:left;
-    width:50%;
-}
+ table.TableCSS thead {
+   background: #FFFFFF;
+   border-bottom: 4px solid #333333;
+ }
 
-#droite2{
-     float:right;
-     margin-right:5%;
-     width : 30%;
-    border-left: 2px  solid #000;
-	  display: inline-block;
-}
+ table.TableCSS thead th {
+   font-size: 15px;
+   font-weight: bold;
+   color: #333333;
+   text-align: center;
+   border-left: 2px solid #333333;
+ }
 
+ table.TableCSS thead th:first-child {
+   border-left: none;
+ }
 
-#gauche{
-    float:left;
-    width:50%;
-}
+ .section {
+   margin-left: 100px;
+   margin-right: 100px;
+ }
 
-#droite{
-     float:right;
-     margin-right:5%;
-     width : 30%;
-    border-left: 2px  solid #000;
-	  display: inline-block;
-}
+ section {
+   max-height: 80%;
+   margin-bottom: 100px;
+ }
 
-#c{
-  margin-left:45%;
-}
+ form {
+   padding-left: 100px;
+   margin-left: 500;
+   margin: 0 auto;
+   width: 700px;
+ }
 
+ .button {
+   background-color: rgb(253, 194, 1);
+   padding: 8px 18px;
+   border: none;
+ }
+
+ #gauche2 {
+   float: left;
+   width: 50%;
+ }
+
+ #droite2 {
+   float: right;
+   margin-right: 5%;
+   width: 30%;
+   border-left: 2px solid #000;
+   display: inline-block;
+ }
 
 
-.button{
-  align-items: center;
-  background-color: #0A66C2;
-  border: 0;
-  border-radius: 100px;
-  box-sizing: border-box;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  justify-content: center;
-  line-height: 20px;
-  max-width: 480px;
-  min-height: 40px;
-  min-width: 0px;
-  overflow: hidden;
-  padding: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: center;
-  touch-action: manipulation;
-  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
-  user-select: none;
-  -webkit-user-select: none;
-  vertical-align: middle;
-}
+ #gauche {
+   float: left;
+   width: 50%;
+ }
+
+ #droite {
+   float: right;
+   margin-right: 5%;
+   width: 30%;
+   border-left: 2px solid #000;
+   display: inline-block;
+ }
+
+ #c {
+   margin-left: 45%;
+ }
 
 
-.button:hover,
-.button:focus { 
-  background-color: #16437E;
-  color: #ffffff;
-}
 
-.button:active {
-  background: #09223b;
-  color: rgb(255, 255, 255, .7);
-}
+ .button {
+   align-items: center;
+   background-color: #0A66C2;
+   border: 0;
+   border-radius: 100px;
+   box-sizing: border-box;
+   color: #ffffff;
+   cursor: pointer;
+   display: inline-flex;
+   font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+   font-size: 16px;
+   font-weight: 600;
+   justify-content: center;
+   line-height: 20px;
+   max-width: 480px;
+   min-height: 40px;
+   min-width: 0px;
+   overflow: hidden;
+   padding: 0px;
+   padding-left: 20px;
+   padding-right: 20px;
+   text-align: center;
+   touch-action: manipulation;
+   transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+   user-select: none;
+   -webkit-user-select: none;
+   vertical-align: middle;
+ }
 
-.button:disabled { 
-  cursor: not-allowed;
-  background: rgba(0, 0, 0, .08);
-  color: rgba(0, 0, 0, .3);
-}
+
+ .button:hover,
+ .button:focus {
+   background-color: #16437E;
+   color: #ffffff;
+ }
+
+ .button:active {
+   background: #09223b;
+   color: rgb(255, 255, 255, .7);
+ }
+
+ .button:disabled {
+   cursor: not-allowed;
+   background: rgba(0, 0, 0, .08);
+   color: rgba(0, 0, 0, .3);
+ }
 
 
-header{
-  background-color: black;
-  height : 100px;
-  color: white;
-  text-align: center;
-}
+ header {
+   background-color: black;
+   height: 100px;
+   color: white;
+   text-align: center;
+ }
 
- 
+
 
  legend {
-    background-color: #000;
-    color: #fff;
-    padding: 3px 6px;
-}
+   background-color: #000;
+   color: #fff;
+   padding: 3px 6px;
+ }
 
-.output {
-    font: 1rem 'Fira Sans', sans-serif;
-}
+ .output {
+   font: 1rem 'Fira Sans', sans-serif;
+ }
 
-input {
-    margin: .4rem;
-}
+ input {
+   margin: .4rem;
+ }
 
 
 
-.buttonLIVE{
-  align-items: center;
-  background-color: red;
-  border: 0;
-  border-radius: 100px;
-  box-sizing: border-box;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  justify-content: center;
-  line-height: 20px;
-  max-width: 480px;
-  min-height: 40px;
-  min-width: 0px;
-  overflow: hidden;
-  padding: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: center;
-  touch-action: manipulation;
-  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
-  user-select: none;
-  -webkit-user-select: none;
-  vertical-align: middle;
-}
+ .buttonLIVE {
+   align-items: center;
+   background-color: red;
+   border: 0;
+   border-radius: 100px;
+   box-sizing: border-box;
+   color: #ffffff;
+   cursor: pointer;
+   display: inline-flex;
+   font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+   font-size: 16px;
+   font-weight: 600;
+   justify-content: center;
+   line-height: 20px;
+   max-width: 480px;
+   min-height: 40px;
+   min-width: 0px;
+   overflow: hidden;
+   padding: 0px;
+   padding-left: 20px;
+   padding-right: 20px;
+   text-align: center;
+   touch-action: manipulation;
+   transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+   user-select: none;
+   -webkit-user-select: none;
+   vertical-align: middle;
+ }
 
-/* NOTES */
-.rating { 
-  border: none;
-  float: left;
-}
+ /* NOTES */
+ .rating {
+   border: none;
+   float: left;
+ }
 
-.rating > input { display: none; } 
-.rating > label:before { 
-  margin: 5px;
-  font-size: 1.25em;
-  font-family: FontAwesome;
-  display: inline-block;
-  content: "\2605";
-}
+ .rating>input {
+   display: none;
+ }
 
-.rating > label { 
-  color: #ddd; 
- float: right; 
-}
+ .rating>label:before {
+   margin: 5px;
+   font-size: 1.25em;
+   font-family: FontAwesome;
+   display: inline-block;
+   content: "\2605";
+ }
 
-/***** CSS Magic to Highlight Stars on Hover *****/
+ .rating>label {
+   color: #ddd;
+   float: right;
+ }
 
-.rating > input:checked ~ label, /* show gold star when clicked */
-.rating:not(:checked) > label:hover, /* hover current star */
-.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+ /***** CSS Magic to Highlight Stars on Hover *****/
 
-.rating > input:checked + label:hover, /* hover current star when changing rating */
-.rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+ .rating>input:checked~label,
+ /* show gold star when clicked */
+ .rating:not(:checked)>label:hover,
+ /* hover current star */
+ .rating:not(:checked)>label:hover~label {
+   color: #FFD700;
+ }
+
+ /* hover previous stars in list */
+
+ .rating>input:checked+label:hover,
+ /* hover current star when changing rating */
+ .rating>input:checked~label:hover,
+ .rating>label:hover~input:checked~label,
+ /* lighten current selection */
+ .rating>input:checked~label:hover~label {
+   color: #FFED85;
+ }
+
+
+
+
+ /* COLOR BUTTON */
+
+ .BUTTON_JAUNE {
+   background: #E5BE24;
+   background-image: -webkit-linear-gradient(top, #E5BE24, #9D9515);
+   background-image: -moz-linear-gradient(top, #E5BE24, #9D9515);
+   background-image: -ms-linear-gradient(top, #E5BE24, #9D9515);
+   background-image: -o-linear-gradient(top, #E5BE24, #9D9515);
+   background-image: -webkit-gradient(to bottom, #E5BE24, #9D9515);
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   color: #FFFFFF;
+   font-family: Brush Script MT;
+
+   padding: 10px;
+   text-decoration: none;
+   display: inline-block;
+   cursor: pointer;
+   text-align: center;
+   width: auto;
+ }
+
+ .BUTTON_JAUNE:hover {
+   background: #D1B441;
+   border: solid #FFAE00 1px;
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   text-decoration: none;
+ }
+
+
+ .BUTTON_GRIS {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   color: #FFFFFF;
+   font-family: Verdana;
+   padding: 10px;
+   background-color: #62615C;
+   text-decoration: none;
+   display: inline-block;
+   cursor: pointer;
+   text-align: center;
+
+ }
