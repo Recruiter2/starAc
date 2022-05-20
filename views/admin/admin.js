@@ -191,7 +191,7 @@ function afficheGroupe() {
 
 
       tbl.appendChild(tblBody);
-      tbl.classList.add("TableCSS");
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
       tab.appendChild(tbl);
       droite.append(tab);
 

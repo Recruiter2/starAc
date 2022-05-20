@@ -194,7 +194,7 @@ function demande() {
             tblBody.appendChild(row);
           }
           tbl.appendChild(tblBody);
-          tbl.classList.add("TableCSS")
+          tbl.classList.add("table", "table-bordered", "text-center", "table-hover")
           document.getElementById("droite").appendChild(tbl);
         }
       }
@@ -341,7 +341,7 @@ function afficheGroupe(possede) {
         sessionStorage.removeItem("groupe");
       }
       tbl.appendChild(tblBody);
-      tbl.classList.add("TableCSS")
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover")
       if (possede != 0) {
         document.getElementById("Atab1").appendChild(tbl);
       }
@@ -436,7 +436,7 @@ function afficheMessage(info) {
           tblBody.appendChild(row);
         }
         tbl.appendChild(tblBody);
-        tbl.classList.add("TableCSS")
+        tbl.classList.add("table", "table-bordered", "text-center", "table-hover")
         div.append(tbl);
       }
       else {

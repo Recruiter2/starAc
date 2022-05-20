@@ -265,7 +265,7 @@ function tableauSpectacle(id_evt) {
           }
           //document.getElementById("tabNotes").remove();
           tbl.appendChild(tblBody);
-          tbl.classList.add("TableCSS");
+          tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
 
 
           tab.appendChild(tbl);
@@ -354,7 +354,7 @@ function selectProno(id_evt) {
       row.appendChild(cell);
       tblBody.appendChild(row);
       tbl.appendChild(tblBody);
-      tbl.classList.add("TableCSS");
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
       document.getElementById("droite").appendChild(tbl);
     });
 }
@@ -479,7 +479,7 @@ function afficheResProno() {
         renvoiNotes(result[i].id_evt, "note" + result[i].id_evt);
       }
       tbl.appendChild(tblBody);
-      tbl.classList.add("TableCSS");
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
       document.getElementById("gauche2").appendChild(tbl);
 
     });
@@ -693,7 +693,7 @@ function tabNoteEve(id_evt) {
               tblBody.appendChild(row);
             });
           tbl.appendChild(tblBody);
-          tbl.classList.add("TableCSS");
+          tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
           tab.appendChild(caption);
           tab.appendChild(tbl);
           div.appendChild(tab);
@@ -792,7 +792,7 @@ function tabNoteGen(estGroupe) {
             }
           });
         tbl.appendChild(tblBody);
-        tbl.classList.add("TableCSS");
+        tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
         tab.appendChild(caption);
         tab.appendChild(tbl);
         add.append(tab);
