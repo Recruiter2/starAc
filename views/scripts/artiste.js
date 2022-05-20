@@ -361,6 +361,9 @@ function afficheMessage(info) {
   if (info === 0) {
     res = "SELECT * FROM `message` WHERE id_artiste=" + id;
   }
+  else if (info==2){
+    res = "SELECT * FROM `rdv` WHERE etat=0 && `id_artiste`=" + id;
+  }
   else {
     res = "SELECT * FROM `info` WHERE `id_artiste` =" + id;
   }
@@ -390,7 +393,7 @@ function afficheMessage(info) {
         }
 
         var cell = document.createElement("td");
-        var cellText = document.createTextNode("SUPPRIMER");
+        var cellText = document.createTextNode("");
         cell.appendChild(cellText);
         row.appendChild(cell);
 
@@ -401,7 +404,12 @@ function afficheMessage(info) {
 
           var row = document.createElement("tr");
           var cell = document.createElement("td");
+          if (info==2){
+            var cellText = document.createTextNode("L'artiste souhaite vous voir id="+result[i].id_spec);
+          }
+          else{
           var cellText = document.createTextNode(result[i].texte);
+          }
           cell.appendChild(cellText);
           row.appendChild(cell);
 
@@ -427,6 +435,15 @@ function afficheMessage(info) {
           if (info === 0) {
             a.href = "javascript:supprimeMSG(" + result[i].id_message + ")";
           }
+          else if (info==2){
+            var a2 = document.createElement('a');
+            var link = document.createTextNode("V");
+            a2.href = "javascript:validRDV(" + result[i].id_rdv + ")";
+            a.href = "javascript:supprimRDV(" + result[i].id_rdv + ")";
+            a2.appendChild(link);
+            cell.appendChild(a2);
+            cell.append("----");
+          }
           else {
             a.href = "javascript:supprimeINFO(" + result[i].id_info + ")";
           }
@@ -443,8 +460,11 @@ function afficheMessage(info) {
         var cellText = document.createTextNode("----------------AUCUN MESSAGES----------------");
         div.append(cellText);
       }
-      if (info != 0) {
+      if (info == 1) {
         document.getElementById("tabInfo").appendChild(div);
+      }
+      else if (info==2){
+        document.getElementById("rdv").appendChild(div);
       }
       else {
         document.getElementById("tabMsg").appendChild(div);
@@ -452,9 +472,27 @@ function afficheMessage(info) {
 
     });
 }
+function validRDV(id_rdv){
+  var request ="UPDATE `rdv` SET `etat`=1 WHERE id_rdv="+id_rdv;
+  db.query(request,
+    function (err, result, fields) {
+      document.getElementById("tab2").remove();
+      afficheMessage(2)
+    });
+}
 
 
-function supprimeINFO(id) {
+
+function supprimRDV(id_rdv){
+  var request ="DELETE FROM `rdv` WHERE `id_rdv`="+id_rdv;
+  db.query(request,
+    function (err, result, fields) {
+      document.getElementById("tab2").remove();
+      afficheMessage(2)
+    });
+}
+
+function supprimeINFO(id) { 
   db.query("DELETE FROM `info` WHERE `id_info`=" + id,
     function (err, result, fields) {
       document.getElementById("tab1").remove();
@@ -517,7 +555,7 @@ function artisteCreeCompte(nom, prenom, mail, mdp1, mdp2, date) {
 function ArtisteConnexion(nom, mdp) {
 
   var res = null;
-  db.query("SELECT `id`,`nom`, `password` FROM `artiste`",
+  db.query("SELECT `id`,`nom`, `password` FROM artiste",
     function (err, result, fields) {
       // if any error while executing above query, throw error
       if (err) throw err;
@@ -528,7 +566,6 @@ function ArtisteConnexion(nom, mdp) {
         }
       }
       if (res != null) {
-        const cookie = { url: 'http://www.github.com', name: 'dummy_name', value: 'dummy' }
         window.sessionStorage.setItem("name_art", res.nom);
         window.sessionStorage.setItem("id_art", res.id);
         window.location.replace("artiste.html");
@@ -562,6 +599,77 @@ function loginSpec() {
 }
 
 
+/***********************************************************/
+function afficheAgd(info) {
+  var id = window.sessionStorage.getItem("id_art");
+  var res = "";
+  if (info === 0) {
+      res = "SELECT * FROM `participe` JOIN evenements on participe.id_evt = evenements.id_evt WHERE `id_solo`= "+id+" ORDER BY evenements.date";
+  }
+  else if (info == 2) {
+      res = "SELECT * FROM `rdv` JOIN spectateur on rdv.id_spec=spectateur.id_spec WHERE etat=1 && `id_artiste`=" + id;
+  }
+  else {
+      res = "SELECT * FROM `participe` INNER JOIN groupe on groupe.id_groupe=participe.id_groupe INNER JOIN groupe_membres on groupe_membres.id_grpe = groupe.id_groupe JOIN evenements on evenements.id_evt = participe.id_evt WHERE groupe_membres.dans=1 && groupe_membres.id_membre=" + id;
+  }
+  db.query(res,
+      function (err, result, fields) {
+          if (result.length != 0) {
+
+              if (err) throw err;
+              /*
+              var tbl = document.createElement("table");
+              var tblBody = document.createElement("tbody");
+              var tblHead = document.createElement("thead");
+              var row = document.createElement("tr");
+              var cell = document.createElement("td");
+              var motif ='----------------------------------------------------';
+              var cellText = document.createTextNode("");
+              cell.appendChild(cellText);
+              row.appendChild(cell);
+              tblHead.appendChild(row);
+              tbl.appendChild(tblHead);
+              */
+              var cellText = document.createTextNode("----------------------------------------------------");
+              var row = document.createElement("tr");
+              var cell = document.createElement("td");
+              cell.appendChild(cellText);
+              row.appendChild(cell);
+              document.getElementById('agenda').append(row);
+              for (var i = 0; i < result.length; i++) {
+                  var row = document.createElement("tr");
+                  var cell = document.createElement("td");
+                  if (info==0){
+                    var cellText = document.createTextNode("("+result[i].id_participant+") SOLO : "+result[i].nom + "("+result[i].date.toISOString().split('T')[0]+") => "+result[i].heure);
+                  }
+                  else if(info==1){
+                    var cellText = document.createTextNode("("+result[i].id_participant+") GROUPE ("+result[i].nomG+"): "+result[i].nom + "("+result[i].date.toISOString().split('T')[0]+") => "+result[i].heure);
+                  }
+                  else{
+                    var cellText = document.createTextNode("("+ result[i].id_rdv+") RDV : " + result[i].nom + " "+result[i].prenom);
+                  }
+                  
+                  cell.appendChild(cellText);
+                  row.appendChild(cell);
+                  //tblBody.appendChild(row);
+                  document.getElementById('agenda').append(row);
+                  var cellText = document.createTextNode("----------------------------------------------------");
+                  var row = document.createElement("tr");
+                  var cell = document.createElement("td");
+                  cell.appendChild(cellText);
+                  row.appendChild(cell);
+                  document.getElementById('agenda').append(row);
+                  //tblBody.appendChild(row);
+              }
+              //tbl.appendChild(tblBody);
+              //tbl.classList.add("TableCSS");
+              //document.getElementById('centrer').append(tbl);
+          }
+      });
+}
+
+
+
 
 
 
@@ -569,7 +677,7 @@ function choixA(value) {
   if (value == "2") {
     window.sessionStorage.removeItem("id_art");
     window.location.assign("index.html");
-  }
+  }s
   else if (value == "1") {
     window.location.assign("modifCompteA.html");
   }

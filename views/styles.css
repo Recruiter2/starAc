@@ -8,6 +8,13 @@
    padding: 3%;
  }
 
+ #centre{
+  text-align: center;
+  margin: auto;
+}
+
+
+
  table.TableCSS {
    font-family: Verdana, Geneva, sans-serif;
    border: 1px solid #FFFFFF;

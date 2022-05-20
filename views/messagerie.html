@@ -24,16 +24,13 @@
     <option value="2">Deconnexion</option>
 
     </select>
-  </header>
+</header>
 
   <section id="tabInfo">
     <h1> INFOS IMPORTANTE </h1>
 
   </section>
-
-  <section id="tabMsg">
-    <h1> Mes Messages/Mes demandes </h1>
-  </section>
+  
   <div id="droite">
     <form>
       <fieldset>
@@ -48,19 +45,28 @@
         </div>
         <div>
           <label for="choose">Détails à renseigner :</label>
-          <input id="details" name="details" <input type="text" size="50" style="height:100px;" />
+          <input id="details" name="details" type="text" size="50" style="height:100px;" />
     </div>
       </fieldset>
     </form>
-    <button onClick="envoiMessage(details.value);"/>
+    <button onClick="envoiMessage(details.value);">
         Soumettre
         </button>
   </div>
+  <section id="tabMsg">
+    <h1> Mes Messages/Mes demandes </h1>
+  </section>
+
+  <section id="rdv">
+    <h1> Demande de rendez vous  </h1>
+  </section>
+
+
 
   <br/><br/> <br/><br/> <br/><br/> <br/><br/>
 
   <script>
-    afficheMessage(1);afficheMessage(0);
+    afficheMessage(1);afficheMessage(0);afficheMessage(2);
   </script>
 </body>
 
