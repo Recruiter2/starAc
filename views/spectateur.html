@@ -68,19 +68,24 @@
         var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
         document.write(date);
       </script>
-    <section id="c">
+    <section id="c" class="">
+
       <p>
-        <button class="button" type="button" onclick="reservation();"> RESERVATION </button>
+        <form>
+          <button class="button" type="button" onclick="reservation();"> RESERVATION </button>
+        </form>
       </p>
+
       <p>
-      <form action="classement.html">
-        <input type="submit" class="button" value="CLASSEMENT" />
-      </form>
+        <form action="classement.html">
+          <input type="submit" class="button" value="CLASSEMENT" />
+        </form>
       </p>
+
       <p>
-      <form action="pronostique.html">
-        <input type="submit" class="button" value="PRONOSTIQUER" />
-</form>
+        <form action="pronostique.html">
+          <input type="submit" class="button" value="PRONOSTIQUER" />
+        </form>
       </p>
 
     </section>

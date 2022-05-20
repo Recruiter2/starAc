@@ -115,13 +115,13 @@
  #droite {
    float: right;
    margin-right: 5%;
-   width: 30%;
+   width: fit-content;
    border-left: 2px solid #000;
    display: inline-block;
  }
 
  #c {
-   margin-left: 45%;
+   margin-left: 0%;
  }
 
 
