@@ -677,7 +677,7 @@ function choixA(value) {
   if (value == "2") {
     window.sessionStorage.removeItem("id_art");
     window.location.assign("index.html");
-  }s
+  }
   else if (value == "1") {
     window.location.assign("modifCompteA.html");
   }
