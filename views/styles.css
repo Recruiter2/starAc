@@ -18,6 +18,17 @@
   width: fit-content;
 }
 
+.center {
+  justify-content: center;
+  text-align: center;
+}
+
+.section {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+
  table.TableCSS {
    font-family: Verdana, Geneva, sans-serif;
    border: 1px solid #FFFFFF;

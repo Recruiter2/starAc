@@ -191,7 +191,7 @@ function tableauSpectacle(id_evt) {
 
           if (result2[0].etat == 1) {
             var cell = document.createElement("td");
-            cell.style.width = '200px';
+            cell.style.width = 'fit-content';
             var cellText = document.createTextNode("\u2B50 ************NOTES************ \u2B50");
             cell.appendChild(cellText);
             row.appendChild(cell);
