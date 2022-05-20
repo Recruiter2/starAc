@@ -38,7 +38,7 @@
 
 
 
-    <form>
+    <form id="centre">
        <h1> Creer un groupe </h1>        
        <fieldset>
 
@@ -48,29 +48,27 @@
 
         
     <div>
-        <label for="choose">Nom Groupe :</label>
-        <input id="nom"  name="nom" required minlength="1" maxlength="10">
+        <label for="choose"></label>
+        <input id="nom"   placeholder="Nom" name="nom" required minlength="1" maxlength="10">
     </div>
     <div>
-        <label for="choose">Type :</label>
-        <input id="typee" name="typee" required minlength="3" maxlength="10">
+        <label for="choose"></label>
+        <input id="typee"  placeholder="Type" name="typee" required minlength="3" maxlength="10">
     </div>
 
 
-    <p> Rechercher des membres ? </p>
+    <i><p> Rechercher des membres ? </p></i>
 
     <form action="#n" name="TheForm">
     <label for="membre"></label>
     <input type="radio" name="membreS" value="0" checked> Non
     <input type="radio" name="membreS" value="1" > Oui<br><br>
     </form>
-    
+    <button onClick="creeGroupe(nom.value,typee.value);"/>
+    Soumettre
+    </button>
     </fieldset>
-    <div>
-        <button onClick="creeGroupe(nom.value,typee.value);"/>
-        Soumettre
-        </button>
-    </div>
+  
     </form>
     <script>afficheGroupe(1);afficheGroupe(0);demande();</script>
   </body>
