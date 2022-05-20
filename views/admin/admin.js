@@ -48,10 +48,11 @@ function connexionAdmin(nom, mdp) {
   });
 }
 function SuppEv(id) {
-  var sql = "DELETE FROM `evenements` WHERE id_evt='" + id + "'";
+  var sql = "DELETE FROM `evenements` WHERE `evenements`.`id_evt` = " + id + "";
 
   db.query(sql, function (err, result) {
     if (err) alert("ERREUR");
+    
     else {
       alert("DELETED");
       window.location.assign('SupprEvenement.html');
@@ -190,7 +191,7 @@ function afficheGroupe() {
 
 
       tbl.appendChild(tblBody);
-      tbl.classList.add("TableCSS");
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
       tab.appendChild(tbl);
       droite.append(tab);
 
@@ -422,7 +423,8 @@ function TabEve() {
       }
       // put the <tbody> in the <table>
       tbl.appendChild(tblBody);
-      tbl.classList.add("TableCSS")
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
+      tblHead.classList.add("table-primary");
       document.getElementById('haut').appendChild(tbl);
 
 
@@ -473,7 +475,7 @@ function lanceEvenements(val) {
         else {
           var row = document.createElement("tr");
           var cell = document.createElement("td");
-          var cellText = document.createTextNode("-----------------");
+          var cellText = document.createTextNode("id");
           cell.appendChild(cellText);
           row.appendChild(cell);
           row.appendChild(cell);
@@ -539,7 +541,7 @@ function lanceEvenements(val) {
       tblHead.appendChild(row);
       tbl.appendChild(tblHead);
       }
-      tbl.classList.add("TableCSS");
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
       if (val == 0) {
         document.getElementById("gauche").appendChild(tbl);
       }
@@ -650,6 +652,8 @@ function afficheMessage() {
           var butR = document.createElement("input");
           butR.value = "REFUSER";
           butR.type = "button";
+          butA.classList.add("btn", "btn-success");
+          butR.classList.add("btn", "btn-warning");
           butR.setAttribute('onclick', "modifEtatMSG(2," + result[i].id_message + ")");
 
           cell.appendChild(butA);
@@ -661,7 +665,8 @@ function afficheMessage() {
       }
       // put the <tbody> in the <table>
       tbl.appendChild(tblBody);
-      tbl.classList.add("TableCSS")
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
+      
       document.getElementById("milieu").appendChild(tbl);
 
 

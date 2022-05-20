@@ -92,7 +92,7 @@ function tabEve() {
       }
       // put the <tbody> in the <table>
       tbl.appendChild(tblBody);
-      tbl.classList.add("TableCSS")
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover")
       document.getElementById("gauche").innerText = "Evenements";
       document.getElementById("gauche").appendChild(tbl);
 
@@ -160,7 +160,7 @@ function afficheGroupe() {
         tblBody.appendChild(row);
       }
       tbl.appendChild(tblBody);
-      tbl.classList.add("TableCSS")
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover")
       document.getElementById("droite").innerText = "Groupe";
       document.getElementById("droite").appendChild(tbl);
       console.log(result);
