@@ -652,6 +652,8 @@ function afficheMessage() {
           var butR = document.createElement("input");
           butR.value = "REFUSER";
           butR.type = "button";
+          butA.classList.add("btn", "btn-success");
+          butR.classList.add("btn", "btn-warning");
           butR.setAttribute('onclick', "modifEtatMSG(2," + result[i].id_message + ")");
 
           cell.appendChild(butA);
@@ -664,8 +666,7 @@ function afficheMessage() {
       // put the <tbody> in the <table>
       tbl.appendChild(tblBody);
       tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
-      butA.classList.add("btn", "btn-success");
-      butR.classList.add("btn", "btn-warning");
+      
       document.getElementById("milieu").appendChild(tbl);
 
 
