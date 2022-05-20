@@ -475,7 +475,7 @@ function lanceEvenements(val) {
         else {
           var row = document.createElement("tr");
           var cell = document.createElement("td");
-          var cellText = document.createTextNode("-----------------");
+          var cellText = document.createTextNode("id");
           cell.appendChild(cellText);
           row.appendChild(cell);
           row.appendChild(cell);
@@ -541,7 +541,7 @@ function lanceEvenements(val) {
       tblHead.appendChild(row);
       tbl.appendChild(tblHead);
       }
-      tbl.classList.add("TableCSS");
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
       if (val == 0) {
         document.getElementById("gauche").appendChild(tbl);
       }
