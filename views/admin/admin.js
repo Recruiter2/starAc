@@ -663,7 +663,9 @@ function afficheMessage() {
       }
       // put the <tbody> in the <table>
       tbl.appendChild(tblBody);
-      tbl.classList.add("table", "table-bordered", "text-center", "table-hover")
+      tbl.classList.add("table", "table-bordered", "text-center", "table-hover");
+      butA.classList.add("btn", "btn-success");
+      butR.classList.add("btn", "btn-warning");
       document.getElementById("milieu").appendChild(tbl);
 
 
