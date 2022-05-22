@@ -212,10 +212,13 @@
         document.getElementsByClassName("button_reserv")[0].innerHTML = "Reserver (" + sCellsAlreadySelected.length + " places) pour " + requirement + " points";
     }
 
+    var sReservationLocked = false;
+
     // Quand l'utilsateur appuie sur le bouton pour reserver ses places, cette fonction est appelée
     function reserver() {
         let requirement = 200 * sCellsAlreadySelected.length;
-        if((sCellsAlreadySelected.length > 0) && (sNbPoints >= requirement)) {
+        if((sCellsAlreadySelected.length > 0) && (sNbPoints >= requirement) && !sReservationLocked) {
+            sReservationLocked = true;
             enlevePoints(requirement);
             let id_evt = window.sessionStorage.getItem("id_evt");
             let id_spec = window.sessionStorage.getItem("id_spec");
@@ -226,8 +229,7 @@
                 sql += "(NULL, "+id_evt+", "+id_spec+","+pos_x+","+pos_y+"),";
             });
             sql = sql.substring(0, sql.length-1) + ";";
-            db.query(sql);
-            document.location.reload();
+            db.query(sql, function (err, result, fields) { document.location.reload(); });
         }
     }
 
