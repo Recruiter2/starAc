@@ -169,8 +169,9 @@ function demande() {
             row.appendChild(cell);
 
             var cell = document.createElement("td");
-            var cellText = document.createTextNode(result[i].id_membre);
-            cell.appendChild(cellText);
+            cell.id="nom"+result[i].id_membre+i;
+            donneNomArt(result[i].id_membre,"nom"+result[i].id_membre+i);
+            //var cellText = document.createTextNode(result[i].id_membre);
             row.appendChild(cell);
 
             var cell = document.createElement("td");
@@ -206,6 +207,16 @@ function demande() {
 }
 
 
+function donneNomArt(id,pos){
+    db.query("SELECT * FROM `artiste` WHERE id="+id,
+      function (err, result, fields) {
+        if (err) throw err;
+        var nom;
+        nom = result[0].nom;
+        console.log(nom, result[0]);
+        document.getElementById(pos).append(nom);
+      });
+}
 
 function afficheGroupe(possede) {
 
@@ -550,7 +561,7 @@ function artisteCreeCompte(nom, prenom, mail, mdp1, mdp2, date) {
 }
 
 
-
+/******************************************************/
 
 
 function ArtisteConnexion(nom, mdp) {
@@ -600,7 +611,7 @@ function loginSpec() {
 }
 
 
-/***********************************************************/
+/******************AGENDA*******************************/
 function afficheAgd(info) {
   var id = window.sessionStorage.getItem("id_art");
   var res = "";
