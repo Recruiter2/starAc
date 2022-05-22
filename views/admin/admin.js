@@ -22,11 +22,15 @@ db.connect(
   });
 
 
-function creerEve(nom, date, prix, heure) {
-  console.log("ok");
-  alert(nom);
-  var sql = "INSERT INTO `evenements`(`nom`, `date`, `prix`, `heure`) VALUES ('" + nom + "','" + date + "','" + prix + "','" + heure + "')";
-
+function creerEve(nom, date, prix, heure,img) {
+  console.log(img);
+  if(img==''){
+    img = "https://img.huffingtonpost.com/asset/5f1a00b8270000b10fe674d7.jpeg?cache=vM0RbxN9YX&ops=scalefit_630_noupscale";
+  }
+  
+  var sql = "INSERT INTO `evenements`(`nom`, `date`, `prix`, `heure`,img,etat) VALUES ('" + nom + "','" + date + "','" + prix + "','" + heure + "','"+img+"',0)";
+  console.log(sql);
+  alert(nom,img);
   db.query(sql, function (err, result) {
 
     if (err) throw new Error("ERREUR INSERTION");
