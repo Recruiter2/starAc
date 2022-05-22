@@ -98,7 +98,7 @@ function tabEve() {
       tbl.appendChild(tblBody);
       tbl.classList.add("table", "table-bordered", "text-center", "table-hover")
     
-      document.getElementById("droite").appendChild(tbl);
+      document.getElementById("gauche").appendChild(tbl);
 
 
       console.log(result);
@@ -169,7 +169,7 @@ function afficheGroupe() {
       tbl.appendChild(tblBody);
       tbl.classList.add("table", "table-bordered", "text-center", "table-hover")
      
-      document.getElementById("droite").appendChild(tbl);
+      document.getElementById("gauche").appendChild(tbl);
       console.log(result);
 
     });
