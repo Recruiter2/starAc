@@ -189,6 +189,7 @@ function giveIdfromRadio(element) {
 }
 
 /******************/
+/*Creneau automatique de 10m pour le prochain participant */
 function ajoute10M(temps) {
   var min = parseInt(temps[3]);
   min = min + 1;
