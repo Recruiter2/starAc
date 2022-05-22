@@ -47,7 +47,6 @@ function creeGroupe(nom, type) {
   var id = window.sessionStorage.getItem("id_art");
   var sql = "INSERT INTO `groupe`(`nomG`, `type`, `id_createur`,`recherche`) VALUES ('" + nom + "','" + type + "','" + id + "','" + parseInt(val) + "')";
 
-
   db.query(sql, function (err, result) {
     if (err) alert("ERREUR INSERTION");
     else {
@@ -212,16 +211,17 @@ function afficheGroupe(possede) {
 
   var id = window.sessionStorage.getItem("id_art");
   var res = "";
-  if (possede === 0) {
-    res = "SELECT * FROM `groupe` LEFT JOIN groupe_membres ON groupe.id_groupe = groupe_membres.id_grpe WHERE id_createur!=" + id;
-  }
+  if (possede == 0) {
+    res = "SELECT * FROM `groupe` LEFT JOIN groupe_membres ON groupe.id_groupe = groupe_membres.id_grpe AND groupe_membres.id_membre="+id+" WHERE groupe.id_createur!="+id;
+    console.log(res);
+    }
   else {
-    res = "SELECT * FROM `groupe` WHERE id_createur=" + id;
+    res = "SELECT * FROM `groupe` WHERE groupe.id_createur="+id;
   }
   db.query(res,
     function (err, result, fields) {
       if (err) throw err;
-
+      var id = window.sessionStorage.getItem("id_art");
       var tbl = document.createElement("table");
       var tblBody = document.createElement("tbody");
       var tblHead = document.createElement("thead");
@@ -275,7 +275,7 @@ function afficheGroupe(possede) {
 
 
         if (possede != 0) { // Pour la 3me colonne on regarde si ce sont le groupe appartient à l'utilisateur, si oui, on n'affichera que le oui/non pour modifier l'entrée de nouveux membres dans le groupe
-          if (recherche === 1) {
+          if (recherche == 1) {
             var link = document.createTextNode("Oui");
             rep.appendChild(link);
             rep.href = "javascript:modifGroupe(0," + result[i].id_groupe + ");";
@@ -291,9 +291,9 @@ function afficheGroupe(possede) {
         else { // Sinon on regarde si l'utilisatuer peut rejoindre/partir/En attente dans un groupe qui ne lui appartient pas
           //console.log(id,id_groupe,getGroupe(id, id_groupe));
 
-          console.log(result[i]);
+          //console.log(result[i]);
           if (result[i].dans != null) {
-            if (result[i].dans === 1) {
+            if (result[i].dans == 1) {
               var link = document.createTextNode("Appartient");
             }
             else {
@@ -301,7 +301,7 @@ function afficheGroupe(possede) {
             }
           }
           else {
-            if (recherche === 1) {
+            if (recherche == 1) {
               var link = document.createTextNode("Rejoindre");
               rep.href = "javascript:rejoindre(" + id + "," + id_groupe + ");";
             }
@@ -315,8 +315,9 @@ function afficheGroupe(possede) {
         rep.appendChild(link);
         cell.appendChild(rep);
         row.appendChild(cell);
+        
 
-        if (result[i].dans != null) {
+        if (result[i].dans== 1 ) {
           var cell = document.createElement("td");
           var a = document.createElement('a');
           var link = document.createTextNode("Partir");
@@ -603,15 +604,20 @@ function loginSpec() {
 function afficheAgd(info) {
   var id = window.sessionStorage.getItem("id_art");
   var res = "";
+
   if (info === 0) {
       res = "SELECT * FROM `participe` JOIN evenements on participe.id_evt = evenements.id_evt WHERE `id_solo`= "+id+" ORDER BY evenements.date";
   }
   else if (info == 2) {
       res = "SELECT * FROM `rdv` JOIN spectateur on rdv.id_spec=spectateur.id_spec WHERE etat=1 && `id_artiste`=" + id;
   }
+  else if (info == 4) {
+    res = "SELECT * FROM `participe` JOIN groupe on participe.id_groupe = groupe.id_groupe JOIN evenements on participe.id_evt = evenements.id_evt  WHERE groupe.id_createur=" + id;
+}
   else {
       res = "SELECT * FROM `participe` INNER JOIN groupe on groupe.id_groupe=participe.id_groupe INNER JOIN groupe_membres on groupe_membres.id_grpe = groupe.id_groupe JOIN evenements on evenements.id_evt = participe.id_evt WHERE groupe_membres.dans=1 && groupe_membres.id_membre=" + id;
   }
+  console.log(res);
   db.query(res,
       function (err, result, fields) {
           if (result.length != 0) {
@@ -644,6 +650,9 @@ function afficheAgd(info) {
                   }
                   else if(info==1){
                     var cellText = document.createTextNode("("+result[i].id_participant+") GROUPE ("+result[i].nomG+"): "+result[i].nom + "("+result[i].date.toISOString().split('T')[0]+") => "+result[i].heure);
+                  }
+                  else if(info==4){
+                    var cellText = document.createTextNode("("+result[i].id_participant+") MES GROUPE ("+result[i].nomG+"): "+result[i].nom + "("+result[i].date.toISOString().split('T')[0]+") => "+result[i].heure);
                   }
                   else{
                     var cellText = document.createTextNode("("+ result[i].id_rdv+") RDV : " + result[i].nom + " "+result[i].prenom);
