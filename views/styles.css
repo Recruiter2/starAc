@@ -8,11 +8,23 @@
    padding: 3%;
  }
 
- #centre{
+ #intro{
+   font-size: 30px  ;
+   color : white;
   text-align: center;
   margin: auto;
 }
+#centre{
+  font-size: 30px  ;
+ text-align: center;
+ margin: auto;
+}
 
+#but{
+  text-align: center;
+  margin: auto;
+ 
+}
 
 .table {
   width: fit-content;
@@ -173,13 +185,6 @@
    color: rgba(0, 0, 0, .3);
  }
 
-
- header {
-   background-color: black;
-   height: 100px;
-   color: white;
-   text-align: center;
- }
 
 
 

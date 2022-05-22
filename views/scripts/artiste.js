@@ -673,12 +673,8 @@ function afficheAgd(info) {
 
 
 
-function choixA(value) {
-  if (value == "2") {
+function Deco() {
     window.sessionStorage.removeItem("id_art");
-    window.location.assign("index.html");
-  }
-  else if (value == "1") {
-    window.location.assign("modifCompteA.html");
-  }
+    window.location.assign("index.html")
+
 }
