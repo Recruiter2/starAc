@@ -32,7 +32,11 @@ table.TableCSS thead th:first-child {
   border-left: none;
 }
 
-
+#centre{
+  font-size: 30px  ;
+ text-align: center;
+ margin: auto;
+}
 
 #general{
   margin-left:5%;

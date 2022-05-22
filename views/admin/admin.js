@@ -1,4 +1,4 @@
-//import {connect} from './connexion.js';
+
 //connect();
 const mysql = require('mysql');
 //const session = require('electron');

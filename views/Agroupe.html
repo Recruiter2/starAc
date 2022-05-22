@@ -54,46 +54,53 @@
     </div>
 
 
+    <form id="droite2">
+      <h1> Creer un groupe </h1>        
+      <fieldset>
+
+       <legend>FORMULAIRE 
+         <abbr title="Ce champ est obligatoire"></abbr></legend>
+       
+
+       
+   <div>
+       <label for="choose"></label>
+       <input id="nom"   placeholder="Nom" name="nom" required minlength="1" maxlength="10">
+   </div>
+   <div>
+       <label for="choose"></label>
+       <input id="typee"  placeholder="Type" name="typee" required minlength="3" maxlength="10">
+   </div>
+
+
+   <i><p> Rechercher des membres ? </p></i>
+
+   <form action="#n" name="TheForm">
+   <label for="membre"></label>
+   <input type="radio" name="membreS" value="0" checked> Non
+   <input type="radio" name="membreS" value="1" > Oui<br><br>
+   </form>
+   <button onClick="creeGroupe(nom.value,typee.value);" class="btn btn-outline-dark">
+   Soumettre
+   </button>
+   </fieldset>
+ 
+   </form>
     
     <div id="Atab2">
       <h1> Autres groupes </h1>
     </div>
 
     
+    
 
 
-
-    <form id="centre">
-       <h1> Creer un groupe </h1>        
-       <fieldset>
-
-        <legend>FORMULAIRE 
-          <abbr title="Ce champ est obligatoire"></abbr></legend>
-        
-
-        
-    <div>
-        <label for="choose"></label>
-        <input id="nom"   placeholder="Nom" name="nom" required minlength="1" maxlength="10">
-    </div>
-    <div>
-        <label for="choose"></label>
-        <input id="typee"  placeholder="Type" name="typee" required minlength="3" maxlength="10">
-    </div>
-
-
-    <i><p> Rechercher des membres ? </p></i>
-
-    <form action="#n" name="TheForm">
-    <label for="membre"></label>
-    <input type="radio" name="membreS" value="0" checked> Non
-    <input type="radio" name="membreS" value="1" > Oui<br><br>
-    </form>
-    <button onClick="creeGroupe(nom.value,typee.value);"/>
-    Soumettre
-    </button>
-    </fieldset>
-  
-    </form>
     <script>afficheGroupe(1);afficheGroupe(0);demande();</script>
+    <style>
+      #Atab1,#Atab2{
+        margin-left: 10%;
+        width : 100%
+      }
+    </style>
   </body>
+ 

@@ -5,64 +5,26 @@
   <title>ADMIN CONTROLE</title>
   <script type="text/javascript" src='admin.js'> </script>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="stylesAdmin.css" />
 </head>
 
 <body>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">Gestion Admin</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-        <th colspan="1">Gerer Evenements</th>
-        </td>
-      </tr>
-      </td>
-      <td>
-        <button class="button" type="button"   onclick="window.location.assign('CreeEvenement.html');">
-                         Creer un événement
-                    </button>
-      </td>
-      <td>
-        <button class="button" type="button" onclick="window.location.assign('SupprEvenement.html');">
-                          Supprimer un événement
-                      </button>
-      </td>
-      <td>
-        <button class="button" type="button" onclick="window.location.assign('ModifEvenement.html');">
-                          Modifier infos Evenements
-                      </button>
-      </td>
-      <td>
-        <button class="button" type="button" onclick="window.location.assign('adminLanceEvenement.html');">
-                          START/STOP Evenement
-                      </button>
-      </td>
-      </tr>
-      <tr>
-        <td>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        <th colspan="1">Gerer Groupe/Artiste</th>
-      </tr>
-      </td>
-      <td>
-        <button class="button" type="button" onclick="window.location.assign('modifPassage.html');">
-                         Modifier Infos
-                    </button>
-      </td>
+  
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-light">ADMINISTRATOR</div>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="CreeEvenement.html">Créer un évènement</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="SupprEvenement.html">Supprimer un évènement</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="ModifEvenement.html">Modifier un évènement</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="adminLanceEvenement.html">DEMARRER/STOP un évènement</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="modifPassage.html">Modifier INFOS groupe</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="message.html">Messages</a>
+        </div>
+    </div>
 
-      <td>
-        <button class="button" type="button" onclick="window.location.assign('message.html');">
-                          Messagerie 
-                      </button>
-      </td>
-
-      </tr>
-    </tbody>
-  </table>
+    </div>
+    </body>
+    </html>
+    
