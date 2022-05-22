@@ -59,9 +59,9 @@ function majPointsSpec() {
 ////////////////////////////////RESERVATION//////////////////////////////////////////////////
 
 
-function reservation() {
-  var id_evt = document.getElementById("mySelect").value;
-  window.sessionStorage.setItem("id_evt", id_evt);
+function setIdReservation(id) {
+  //var id_evt = document.getElementById("mySelect").value;
+  window.sessionStorage.setItem("id_evt", id);
   window.location.assign("reservation.html");
 }
 
@@ -99,6 +99,91 @@ function showSelectEve() {
     });
 }
 
+function showSelectEve2(){
+  var request;
+  request = "SELECT * FROM `evenements` WHERE etat=0 || etat=1  ORDER BY date";
+  db.query(request,
+    function (err, result, fields) {
+      for (var i = 0; i < result.length; i++) {
+        var img = document.createElement("img");
+        img.src = "" + result[i].img;
+        if (i==0){
+          img.alt='';
+          
+          img.style.width = "600px";
+          img.style.height = "400px";
+          img.classList.add("img-fluid");
+          document.getElementById("photoEveProchain").appendChild(img);
+          document.getElementById("TextEve").append(result[i].nom);
+          document.getElementById("EveDate").append(result[i].date.toISOString().split('T')[0]);
+          if(result[i].etat==1){
+            tableauSpectacle(result[i].id_evt);
+          var live = document.createElement("input");
+          live.type = "button";
+          live.setAttribute("class","btn btn-danger  btn-lg px-4 me-sm-3")
+          live.value = "LIVE";
+          live.setAttribute('onclick', "window.open('https://www.youtube.com/watch?v=PQdBUEXxCoo');");
+          document.getElementById("live").appendChild(live);
+          }
+          var reservation = document.createElement("input");
+          reservation.type = "button";
+          reservation.setAttribute("class","btn btn-primary btn-lg px-4 me-sm-3 ");
+          reservation.setAttribute("onclick","setIdReservation("+result[i].id_evt+")");
+          reservation.value = "RESERVATION";
+          document.getElementById("reservationMain").appendChild(reservation);
+          var but2 = document.createElement("input");
+          but2.type = "button";
+          but2.setAttribute("onclick","tableauSpectacle("+result[i].id_evt+")");
+          but2.setAttribute("class","btn btn-warning btn-lg px-4 me-sm-3");
+          but2.value = "PROGRAMME";
+          document.getElementById("prograM").appendChild(but2);
+        }
+        else{
+          var but = document.createElement("input");
+          but.type = "button";
+          but.setAttribute("onclick","setIdReservation("+result[i].id_evt+")");
+          but.setAttribute("class","btn btn-outline-primary");
+          but.value = "RESERVATION";
+          var but2 = document.createElement("input");
+          but2.type = "button";
+          but2.setAttribute("onclick","tableauSpectacle("+result[i].id_evt+")");
+          but2.setAttribute("class","btn btn-outline-warning");
+          but2.value = "PROGRAMME";
+
+          var div1 = document.createElement("div");
+          var div2 = document.createElement("div");
+          img.style.width = "200px";
+          img.style.height = "200px";
+          img.setAttribute('class','card-img-top');
+          div2.appendChild(img);
+          var div3 = document.createElement("div");
+          var divTop = document.createElement("div");
+          div1.setAttribute('class',"col-lg-4 mb-5");
+          div2.setAttribute('class',"card h-100 shadow border-0");
+          div3.setAttribute('class',"card-body p-4");
+          divTop.setAttribute('class',"badge bg-primary bg-gradient rounded-pill mb-2");
+          divTop.append(result[i].nom);
+          //var a = document.createElement("a");
+          //a.setAttribute("class","text-decoration-none link-dark stretched-link");
+          //a.append(result[i].date.toISOString().split('T')[0]);
+          var p = document.createElement("p");
+          p.setAttribute("class","card-text mb-0");
+          p.append(result[i].date.toISOString().split('T')[0]);
+        
+          div3.appendChild(divTop);
+          div3.appendChild(p);
+          div1.appendChild(but);
+          div1.appendChild(but2);
+          div2.appendChild(img);
+          div2.appendChild(div3);
+          div1.appendChild(div2)
+          document.getElementById("autrEve").appendChild(div1);
+        }
+
+      }
+    });
+}
+
 function getValueSelectValue(value) {
 
   if (value != "") {
@@ -108,6 +193,8 @@ function getValueSelectValue(value) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////:
+
+/*
 function ShowEve() {
   db.query("SELECT * FROM `evenements` WHERE 1",
     function (err, result, fields) {
@@ -129,7 +216,7 @@ function ShowEve() {
             var buttonLIVE = document.createElement("input");
             buttonLIVE.type = "button";
             buttonLIVE.classList.add("buttonLIVE");
-            buttonLIVE.value = "LIVE" + " EVENEMENT : " + result[i].nom;
+            buttonLIVE.value = "LIVE : " + result[i].nom;
             buttonLIVE.setAttribute('onclick', "window.open('https://www.youtube.com/watch?v=PQdBUEXxCoo');");
             document.getElementById("c").appendChild(buttonLIVE);
             tableauSpectacle(result[i].id_evt)
@@ -146,6 +233,7 @@ function ShowEve() {
     });
 }
 
+*/
 
 
 
@@ -161,7 +249,7 @@ function tableauSpectacle(id_evt) {
           // if any error while executing above query, throw error
           if (err) throw err;
           // if there is no error, you have the result
-          var gauche = document.getElementById("gauche");
+          var programme = document.getElementById("programme");
           let tab = document.createElement("div");
           tab.id = "tab";
           var tbl = document.createElement("table");
@@ -269,7 +357,7 @@ function tableauSpectacle(id_evt) {
 
 
           tab.appendChild(tbl);
-          gauche.append(tab);
+          programme.append(tab);
           //document.getElementById("gauche").removeChild()
           //console.log(result);
         });
@@ -574,18 +662,11 @@ function loginArt() {
   }
 }
 
-
-function choixS(value) {
-  if (value == "2") {
+//////////////////////////////////
+function Deco() {
+ 
     window.sessionStorage.removeItem("id_spec");
     window.location.assign("index.html");
-  }
-  else if (value == "1") {
-    window.location.assign("modifCompteS.html");
-  }
-  else if (value == "3") {
-    window.location.assign("specPaye.html");
-  }
 }
 /////////////////////////////////////////////////////////////////////////////////
 ///////// NOTES FONCTION ///////////
@@ -951,7 +1032,7 @@ function userPossedeIm(id_im, src) {
         img.style.height = "150px";
         img.setAttribute('onclick', "buttonImage("+""+ id_im + ",'" + src + "')");
         document.getElementById("demande").appendChild(img);
-        console.log("passe");
+        //console.log("passe");
       }
     });
 }
@@ -970,7 +1051,7 @@ function buttonImage(id_im,src){
 
 function acheteIm(id_im, src) {
   var id = getID();
-  console.log("passe");
+  //console.log("passe");
   var request = "INSERT INTO `image_spec`(`id_spec`, `id_image`) VALUES (" + id + "," + id_im + ")";
   db.query(request,
     function (err, result, fields) {

@@ -15,14 +15,14 @@
 <body>
   <p>
   </p>
-  <header>
-    <input
-    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();"
-    />
-    <input
-    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();"
-    />
-    <label for="choose-select"></label>
+  <header class="bg-dark py-1">
+    <div id="but">
+      <input id="SPECTATEUR" type="button" value="SPECTATEUR"
+        class="btn btn-outline-light btn-lg px-5" onclick="loginSpec();" />
+      <input id="ARTISTE" type="button" value="   ARTISTE   " class="btn btn-outline-light btn-lg px-5"
+        onclick="loginArt();" />
+    </div>
+</header>
 
     <select name="choose" id="choose-select" onclick="choixA(value);">
     <option value="">--Please choose an option--</option>

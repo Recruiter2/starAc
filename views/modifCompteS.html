@@ -15,18 +15,14 @@
 <body>
   <p>
   </p>
-  <header>
-    <input id="SPECTATEUR" type="button" value="SPECTATEUR" class="button" onclick="loginSpec();" />
-    <input id="ARTISTE" type="button" value="ARTISTE" class="button" onclick="loginArt();" />
-    <label for="choose-select"></label>
-
-    <select name="choose" id="choose-select" onclick="choixS(value);">
-      <option value="">--Please choose an option--</option>
-      <option value="1">Modifier compte</option>
-      <option value="2">Deconnexion</option>
-
-    </select>
-  </header>
+  <header class="bg-dark py-1">
+    <div id="but">
+      <input id="SPECTATEUR" type="button" value="SPECTATEUR"
+        class="btn btn-outline-light btn-lg px-5" onclick="loginSpec();" />
+      <input id="ARTISTE" type="button" value="   ARTISTE   " class="btn btn-outline-light btn-lg px-5"
+        onclick="loginArt();" />
+    </div>
+</header>
 
   <section id='gauche' class='encadrer'>
     <h1> MODIFIER INFORMATION </h1>

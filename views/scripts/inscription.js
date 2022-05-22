@@ -26,7 +26,11 @@ function tabEve() {
       // if any error while executing above query, throw error
       if (err) throw err;
       // if there is no error, you have the result
+      var caption = document.createElement("caption");
+      caption.innerText = "EVENEMENTS";
+    
       var tbl = document.createElement("table");
+      tbl.appendChild(caption)
       var tblBody = document.createElement("tbody");
       var tblHead = document.createElement("thead");
       var row = document.createElement("tr");
@@ -93,8 +97,8 @@ function tabEve() {
       // put the <tbody> in the <table>
       tbl.appendChild(tblBody);
       tbl.classList.add("table", "table-bordered", "text-center", "table-hover")
-      document.getElementById("gauche").innerText = "Evenements";
-      document.getElementById("gauche").appendChild(tbl);
+    
+      document.getElementById("droite").appendChild(tbl);
 
 
       console.log(result);
@@ -115,8 +119,11 @@ function afficheGroupe() {
   db.query(res,
     function (err, result, fields) {
       if (err) throw err;
-
+      var caption = document.createElement("caption");
+      caption.innerText = "GROUPE ";
+     
       var tbl = document.createElement("table");
+      tbl.appendChild(caption);
       var tblBody = document.createElement("tbody");
       var tblHead = document.createElement("thead");
       var row = document.createElement("tr");
@@ -161,7 +168,7 @@ function afficheGroupe() {
       }
       tbl.appendChild(tblBody);
       tbl.classList.add("table", "table-bordered", "text-center", "table-hover")
-      document.getElementById("droite").innerText = "Groupe";
+     
       document.getElementById("droite").appendChild(tbl);
       console.log(result);
 
@@ -260,7 +267,7 @@ function inscription() {
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 function loginSpec() {
-  var res = window.sessionStorage.getItem("id_spect");
+  var res = window.sessionStorage.getItem("id_spec");
   if (res == null) {
     window.location.assign("loginSpectateur.html");
   }

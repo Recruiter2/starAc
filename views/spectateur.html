@@ -5,100 +5,140 @@
   <title>spectateur</title>
   <script type="text/javascript" src='scripts/spectateur.js'> </script>
   <link rel="stylesheet" href="styles.css" />
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link rel="stylesheet" href="styles2.css" />
 
 </head>
 
-<body>
-  <p>
-  </p>
-  <header>
-    <input
-    id="SPECTATEUR" type="button" value="SPECTATEUR" class ="button" onclick="loginSpec();"
-    />
-    <input
-    id="ARTISTE" type="button" value="ARTISTE" class ="button" onclick="loginArt();"
-    />
+<body class="d-flex flex-column h-100">
+  <main class="flex-shrink-0">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container px-5">
+        <a class="navbar-brand" href="index.html">DROPMIC</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+            class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="spectateur.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="classement.html">Classement</a></li>
+            <li class="nav-item"><a class="nav-link" href="specPaye.html">Achat</a></li>
+            <li class="nav-item"><a class="nav-link" href="pricing.html"></a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">Compte</a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                <li><a class="dropdown-item" href="modifCompteS.html">Modifier</a></li>
+                <li><a class="dropdown-item" href="javascript:Deco()">Deconnexion</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Header-->
+    <header class="bg-dark py-1">
+      <div id="but">
+        <input id="SPECTATEUR" type="button" value="SPECTATEUR"
+          class="btn btn-outline-light btn-lg px-5" onclick="loginSpec();" />
+        <input id="ARTISTE" type="button" value="   ARTISTE   " class="btn btn-outline-light btn-lg px-5"
+          onclick="loginArt();" />
+      </div>
+      <br>
+      <div id="intro">
+        <script>
+          document.write(getNomSpect());
+        </script>
+        <br />
+        <p id="p">
+          <script>
+            var img = document.createElement("img");
+            img.src = "" + getSrcImage();
+            img.style.width = "150px";
+            img.style.height = "150px";
+            document.getElementById("p").appendChild(img);
+          </script>
+        </p>
+        <p>
+          <script>document.write(getPointsSpec() + " points");</script>
+        </p>
+      </div>
+      <h2>Evenements</h2>
+    </header>
 
-    <label for="choose-select"></label>
+    <script> showSelectEve2();</script>
 
-    <select name="choose" id="choose-select" onclick="choixS(value);">
-      <option value="">--Please choose an option--</option>
-      <option value="1">Modifier compte</option>
-      <option value="3">Points de fidélités</option>
-      <option value="2">Deconnexion</option>
-    </select>
-  </header>
+    <div class="container px-5">
+      <div class="row gx-5 align-items-center justify-content-center">
+        <div class="col-lg-8 col-xl-7 col-xxl-6">
+          <div class="my-5 text-center text-xl-start">
+            <h1 id='TextEve' class="display-5 fw-bolder  mb-2"></h1>
+            <p id='EveDate' class="lead fw-normal mb-4"></p>
+            <p>
+              <input type="submit" class="btn btn-primary btn-lg px-4 me-sm-3" value="PRONOSTIQUER"
+                onclick="location.href='pronostique.html';" />
+            </p>
+            <p id="reservationMain"></p>
+            <p id="prograM"></p>
+            <p id="live">
+            </p>
+            <div id='mainEve'
+              class="d-grid gap-3 d-sm-flex justify-content-sm-center m-lg-auto justify-content-xl-start">
+            </div>
+          </div>
+        </div>
 
+        <div id='photoEveProchain' class="col-xl-5 col-xxl-6 d-none d-xl-block text-center "><br /></div>
+      </div>
+    </div>
 
-  <h3> Hello
-    <script>
-      document.write(getNomSpect());
-    </script>
-  </h3>
-  <br/>
-  <p id="p"><script>
-    var img = document.createElement("img");
-    img.src = ""+getSrcImage();
-    img.style.width = "100px";
-    img.style.height = "100px";
-    document.getElementById("p").appendChild(img);
-</script> </p>
+    <br />
+    <div id="droite">
+      <br />
+      <p> Nous sommes le
+        <script>
+          var today = new Date();
+          var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+          document.write(date);
+        </script>
+    </div>
+    <section id="gauche" class="py-5">
+      <div class="container px-5 my-5">
+        <div class="row gx-5 justify-content-center">
+          <div class="col-lg-8 col-xl-6">
+            <div class="text-center">
+              <h2 class="fw-bolder">Autres évènements à venir</h2>
+            </div>
+          </div>
+        </div>
+        <div id="autrEve" class="row gx-4">
 
-  <h2>Evenements</h2>
-
-  <div id="gauche">
-
-    <script>
-      ShowEve();
-    </script>
-  </div>
-
-
-
-
-
-  <div id="droite">
-    <p> Nous sommes le
-      <script>
-        var today = new Date();
-        var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
-        document.write(date);
-      </script>
-    <section id="c" class="">
-
-      <p>
-        <form>
-          <button class="button" type="button" onclick="reservation();"> RESERVATION </button>
-        </form>
-      </p>
-
-      <p>
-        <form action="classement.html">
-          <input type="submit" class="button" value="CLASSEMENT" />
-        </form>
-      </p>
-
-      <p>
-        <form action="pronostique.html">
-          <input type="submit" class="button" value="PRONOSTIQUER" />
-        </form>
-      </p>
-
+        </div>
+      </div>
     </section>
-  </div>
+
+    <br />
+   
+    <section id='programme' class="text-center">
+      
+    </section>
 
 
 
 
+    <footer>
 
-  <footer>
-
-  </footer>
+    </footer>
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>
