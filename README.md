@@ -3,6 +3,7 @@
 Forked from https://github.com/javiertoledo/bootstrap-rating-input
 
 I just update bootstrap version to 4.0.0 and new fontawesome icons.
+(Recruiter2 : thanks for downgrading from bootstrap 5 💩)
 
 As a new specification div render! 
 
