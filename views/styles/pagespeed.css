@@ -41,10 +41,18 @@
     box-sizing: border-box; }
   
   html {
+        
+        
+        min-height: 100% !important;
+
+    /* bottom: -1000px;
+    display: flex;
+     height: fit-content;  */
     font-family: sans-serif;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+  }
   
   article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block; }
@@ -8189,7 +8197,10 @@
   .img {
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center; }
+    background-position: center center;
+    
+    height: 100%; 
+  }
   
   .login-wrap {
     position: relative;
